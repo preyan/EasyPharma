@@ -1,121 +1,106 @@
-# 💊 EasyPharma
+# 💊 EasyPharma Workspace
 
-> A modern, phase-locked, zero-error enterprise pharmacy management system built as a library-first Nx Monorepo.
+> **A secure, phase-locked, and resilient enterprise API and Client solution natively constructed in an Nx Monorepo.**
 
-![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg?style=for-the-badge&logo=node.js&logoColor=white)
-![Nx](https://img.shields.io/badge/Nx-Workspace-blue.svg?style=for-the-badge&logo=nx&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-21%20LTS-dd0031.svg?style=for-the-badge&logo=angular&logoColor=white)
-![NestJS](https://img.shields.io/badge/NestJS-11%20LTS-e0234e.svg?style=for-the-badge&logo=nestjs&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma-7-2d3748.svg?style=for-the-badge&logo=prisma&logoColor=white)
-![Playwright](https://img.shields.io/badge/Playwright-E2E-2EAD33.svg?style=for-the-badge&logo=playwright&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-Testing-FCC72B.svg?style=for-the-badge&logo=vitest&logoColor=white)
-
-Welcome to **EasyPharma**, an advanced pharmaceutical inventory and management application. This project is engineered with high scalability, resilience, and strict coding standards meant for production-grade environments.
+EasyPharma represents an absolute standard in architectural fidelity. Every component within is intentionally modular, inherently scalable, and explicitly secured for Enterprise deployment footprints.
 
 ---
 
 ## 🌟 Key Features
 
-- **Enterprise-Grade Security:** JWT-based Authentication, OIDC support, and granular Role-Based Access Control (RBAC).
-- **Core Inventory Management:** Real-time, reactive monitoring of pharmaceutical stock using Angular Signals and RxJS.
-- **Interactive Experience:** Specialized guest "Demo Mode" accompanied by a guided UI tour.
-- **High Performance:** Angular SSR & Hydration for lighting-fast initial loads and top Lighthouse SEO scores.
-- **Resilience & Observability:** Global exception filters, Signal Toasts, automated health checks, and structured logging.
-- **Robust Documentation:** Auto-generated Swagger OpenAPI specs and Compodoc UI architecture documentation.
-- **Cloud-Ready Deployment:** Dockerized multi-stage builds integrated with GitHub Actions CI/CD pipelines.
+### 🔐 Enterprise-Grade Security
+*   **JWT & OIDC Authentication Contexts:** Centralized authorization via `@nestjs/passport` ensuring protected resource availability strictly based on trust.
+*   **Granular RBAC System:** Application-wide Role-Based Access Control enforcing specific domain access (Admin vs. Pharmacist) by declarative `@Roles()` decorators.
+*   **Swagger Bearer Authentication:** Built-in Swagger UI bearer token configuration out-of-the-box.
+
+### ⏱️ Instant Front-End Reactivity
+*   **Zoneless Change Detection:** Next-generation Angular 21 rendering engine without Zone.js overhead (`ExperimentalZonelessChangeDetection` enabled for superior runtime performance).
+*   **NgRx Signal Stores:** Deep integration with Angular's reactive Signals primitive coupled with RxJS streams for real-world telemetry reporting.
+
+### 🚀 Production Reliability & UX
+*   **Interactive Demo Architectures:** Sandboxed UI layer with `@angular/cdk/overlay` guided tours.
+*   **SSR & Universal Hydration:** Improved Time-To-Interactive (TTI) indices resulting in maximum SEO footprints.
+*   **Exception Telemetry:** Centralized NestJS Exception Filtration and Angular global structural logging logic powered by Winston/Pino protocols.
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠️ Technology Stack Breakdown
 
-The project sits on a cutting-edge, phase-locked stack:
-
-### **Workspace & Tools**
-- **Monorepo:** [Nx](https://nx.dev) (Library-first architecture for domain isolation)
-- **Package Manager:** [pnpm](https://pnpm.io)
-- **Code Quality:** ESLint, Prettier, SonarQube
-- **Git Hooks:** Husky, Commitlint (Conventional Commits)
-
-### **Frontend (client-web)**
-- **Framework:** [Angular 21 LTS](https://angular.dev)
-- **Architecture:** Standalone Components, Zoneless Change Detection (`ExperimentalZonelessChangeDetection` migration)
-- **State Management:** NgRx Signal Store
-- **Styling:** Tailwind CSS
-
-### **Backend (api)**
-- **Framework:** [NestJS 11 LTS](https://nestjs.com/) (Express-based)
-- **ORM:** [Prisma 7](https://www.prisma.io/)
-- **API Spec:** Swagger (OpenAPI)
-- **Security:** `@nestjs/passport`, `@nestjs/jwt`
-
-### **Testing & CI/CD**
-- **Unit Testing:** Vitest (Frontend & Libs), Jest (Backend)
-- **E2E Testing:** Playwright
-- **CI/CD:** GitHub Actions, Docker, Renovate/Dependabot
+| Layer | Technology Set |
+| :--- | :--- |
+| **Workspace Platform** | `Nx Monorepo`, `pnpm` |
+| **Backend Core** | `NestJS 11 LTS`, `Express`, `TypeScript` |
+| **Database Gateway** | `Prisma ORM 7`, `Zod Validation` |
+| **Frontend Core** | `Angular 21 LTS`, `NgRx Signal Stores`, `RxJS` |
+| **Testing Regimen** | `Vitest`, `Jest`, `Playwright` |
+| **CI/CD Triggers** | `Husky Hooks`, `Conventional Commits`, `GitHub Actions` |
 
 ---
 
-## 📐 High Coding Standards
+## 📐 Strict Coding Protocols
 
-This project adheres to a **Strict Operational Protocol**:
-1. **Zero-Error Tolerance:** The build, test, and lint processes must continuously exit with code `0`.
-2. **Atomic Commits:** Uses Conventional Commits. No feature bundling. Incremental root version bumps on every pass.
-3. **Phase-Locked Execution:** Development cannot proceed to the next phase without a complete `Phase Audit` of the preceding phase.
-4. **Library-First Domain:** Features are generated as Nx libraries under `/libs` rather than stuffed inside application bundles, ensuring high reusability and graph caching efficiency.
+Our application runs entirely based on the following rules:
 
----
-
-## 🗺️ Phase-Wise Development Plan
-
-Our roadmap consists of 8 heavily audited phases. 
-
-- [x] **[PHASE 1] Infrastructure & Workspace (The Skeleton):** Initialize Nx, Angular, NestJS, Prisma, and quality gates. Stop at Audit.
-- [ ] **[PHASE 2] Security, OIDC & RBAC (The Shield):** Implement JWT Auth, Roles Guards, NgRx Auth Store, and Swagger Config.
-- [ ] **[PHASE 3] Core Domain (Inventory Management):** Prisma Schemas, NestJS CRUD handles mapped to Zod, Signal-based Angular tables.
-- [ ] **[PHASE 4] Interactive Demo & SSR (The Experience):** Mock services, @angular/cdk/overlay tours, and Angular SSR setup.
-- [ ] **[PHASE 5] Resilience & Observability:** NestJS/Angular Exception handling, structural logging, health checks.
-- [ ] **[PHASE 6] Documentation & MNC Compliance:** Execute Compodoc, generate Swagger artifacts, enforce 80% Vitest coverage.
-- [ ] **[PHASE 7] DevOps & Deployment:** Multi-stage Dockerfiles, GitHub Action configs, automated migrations.
-- [ ] **[PHASE 8] Scale & Maintenance:** Redis Caching layers, advanced DB indexing, and pipeline handoff.
+1.  **Zero-Error Threshold:** The application is blocked from committing if any compiler, test, or linting anomaly arises.
+2.  **Library-First Domain Separation:** Features live inside `/libs` and are selectively exposed. The `api` and `client-web` app directories act solely as entry points to wire libraries together, enforcing decoupled architecture out of the box.
+3.  **Audited Lifecycle Phases:** We follow a disciplined, 8-Phase sequence, validating and locking all modules in each phase prior to continuing.
 
 ---
 
-## ⚙️ Quick Start Setup
+## 🗺️ The Eight-Phase Implementation Plan
 
-### Prerequisites
-- Node.js `v20+`
-- pnpm `v10+`
-- running PostgreSQL/MySQL instance
+We are executing software creation structurally and surgically.
 
-### Installation
-1. Clone the repo and install dependencies:
-   ```bash
-   git clone https://github.com/your-org/easy-pharma.git
-   cd easy-pharma
-   pnpm install
-   ```
-
-2. Generate Prisma Client logic & push schemas:
-   ```bash
-   npx prisma generate
-   npx prisma db push
-   ```
-
-3. Spin up the applications natively:
-   ```bash
-   # Run NestJS API (http://localhost:3000)
-   pnpm nx serve api
-   
-   # Run Angular App (http://localhost:4200)
-   pnpm nx serve client-web
-   ```
-
-### Running the Global Audit 🚀
-Validate the entire workspace functionality with Nx parallel runners:
-```bash
-pnpm nx run-many -t lint test build
-```
+*   ✅ **[PHASE 1] Infrastructure & Workspace (The Skeleton):**
+    *   Initialize Nx, Angular, NestJS, Prisma, and quality gates. Audit.
+*   ❌ **[PHASE 2] Security, OIDC & RBAC (The Shield):**
+    *   Auth service context execution, JWT strategy implementations, Role guards, and Swagger integrations.
+*   ❌ **[PHASE 3] Core Domain (Inventory Flow):**
+    *   Database schema pushes, NestJS CRUD interfaces with Zod payload parsings. Signal-driven UI tables.
+*   ❌ **[PHASE 4] Guest Demonstrations & SSR:**
+    *   Deploy SSR structures out of the box. Hook mock APIs, execute interactive CDK overlay tours globally.
+*   ❌ **[PHASE 5] Resilience Validation:**
+    *   Automated Health Status APIs (`/health`). Implement Global Exception filters outputting format-ready JSON traces.
+*   ❌ **[PHASE 6] Compliance Generation:**
+    *   Compile automated codebase Compodoc metrics and finalized Open-API specs for third-party auditing. Target >80% code coverage threshold.
+*   ❌ **[PHASE 7] CI/CD Implementations:**
+    *   Stage multi-layer Dockerfiles pushing straight through GitHub actions integration triggers.
+*   ❌ **[PHASE 8] Scale Strategies:**
+    *   Wire-up database scaling triggers, apply Redis query cache pipelines for maximum I/O. Hand-off package maintenance processes.
 
 ---
 
-*Proprietary Software. Developed for EasyPharma internal usage.*
+## ⚙️ Quick Start Installation
+
+Ensure you have Node 20+ and pnpm installed natively.
+
+1.  **Clone down the mono-repo stack:**
+    ```bash
+    git clone https://github.com/your-org/easy-pharma.git
+    cd easy-pharma
+    pnpm install
+    ```
+
+2.  **Generate Prisma ORM contexts:**
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    ```
+
+3.  **Commence Live Server Environments:**
+    ```bash
+    # Execute the Backend Router Gateway on :3000
+    pnpm nx serve api
+    
+    # Execute the Angular Signal App on :4200
+    pnpm nx serve client-web
+    ```
+
+4.  **Confirm Overall Workspace Health:**
+    ```bash
+    pnpm nx run-many -t lint test build
+    ```
+
+---
+
+> *Developed under absolute zero-error threshold coding standards.*
