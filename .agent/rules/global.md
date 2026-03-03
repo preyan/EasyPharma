@@ -65,12 +65,12 @@ trigger: always_on
 - **State Sync**: Update the local `plan.md` task by appending the GitHub Issue URL next to the task item for immediate visibility.
 - **Self-Healing AI Oversight**: If 'Nx Self-Healing' suggests a fix for a test, the agent must verify the fix doesn't use `any` types or bypass security guards to make the test pass.
 
-# GitHub Documentation Loop
+# Documentation-as-Code (In-Repo)
 
-- **Wiki & Docs**: Significant architectural decisions (ADRs) must be committed to `/docs` and referenced in the GitHub Issue body.
-- **Issue Closing**: When a task is completed, the agent must comment on the related GitHub Issue with a summary of the fix and the final commit hash before closing it.
-- **Plan Sync**: The `plan.md` in the repository must always reflect the current state of GitHub Issues. If an issue is open, the task in `plan.md` must be marked as `[IN PROGRESS - #IssueNum]`.
-- **Labels as Metadata**: Use labels (`phase:1`, `phase:2`, etc.) to map issues directly to the Roadmap phases in GitHub Projects/Issues.
+- **Source of Truth**: All architectural decisions (ADRs) and technical guides MUST be stored in the root `/docs` folder as Markdown files.
+- **Reference Over Copy**: Instead of updating a wiki, the agent must link to the specific file in `/docs` (e.g., `https://github.com/repo/blob/main/docs/auth-flow.md`) within the GitHub Issue or PR description.
+- **Agent Lifecycle**: Every feature branch MUST include an update to the relevant `.md` file in `/docs`.
+- **Formatting**: Use standard GitHub Flavored Markdown (GFM) with Mermaid.js for diagrams to ensure visibility in the GitHub UI.
 
 # GitHub Project Automation
 
