@@ -81,7 +81,7 @@ Goal: Production-grade error handling and logging.
 
 [ ] Task 5.4: Configure Winston/Pino for structured logging → https://github.com/preyan/EasyPharma/issues/31.
 
-[ ] Task 5.5: Implement Background Task Scheduling (@nestjs/schedule) for Cron Jobs → https://github.com/preyan/EasyPharma/issues/46.
+[ ] Task 5.5: Implement Background Task Scheduling (@nestjs/schedule) for Cron Jobs → https://github.com/preyan/EasyPharma/issues/46. - [ ] Expiry Sentinel (Daily drug expiry scanning) - [ ] Low-Stock Watchdog (Twice-daily inventory threshold checks) - [ ] Automated Session/Token Cleanup - [ ] Daily Operational Summary Aggregation - [ ] Audit Log Archiving (Weekly)
 
 [ ] PHASE 5 AUDIT: Simulate API failures to verify error UI. STOP HERE.
 
