@@ -11,8 +11,6 @@
 
 EasyPharma is a health-critical platform. We take security seriously.
 
-**Do not report security vulnerabilities through public GitHub issues.**
-
 Please report any sensitive findings directly to the development team by **creating a GitHub issue with the highest priority.**
 
 We will acknowledge your report within 48 hours and provide a timeline for a resolution.
