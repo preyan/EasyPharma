@@ -1,5 +1,10 @@
 # 💊 EasyPharma Workspace
 
+[![CI](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml/badge.svg)](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml)
+[![Compliance & Docs](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml/badge.svg)](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml)
+[![Nx](https://img.shields.io/badge/Nx-smart--monorepo-blue?logo=nx&logoColor=white)](https://nx.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg)](https://opensource.org/licenses/MIT)
+
 > **A secure, phase-locked, and resilient enterprise API and Client solution natively constructed in an Nx Monorepo.**
 
 EasyPharma represents an absolute standard in architectural fidelity. Every component within is intentionally modular, inherently scalable, and explicitly secured for Enterprise deployment footprints.
@@ -65,7 +70,8 @@ Our application runs entirely based on the following rules:
 We are executing software creation structurally and surgically.
 
 - ✅ **[PHASE 1] Infrastructure & Workspace (The Skeleton):**
-  - Initialize Nx, Angular, NestJS, Prisma, and quality gates. Audit.
+  - Initialize Nx, Angular, NestJS, Prisma, and quality gates.
+  - Repository cleanup and premium Landing Page implementation. Audit complete.
 - ❌ **[PHASE 2] Security, OIDC & RBAC (The Shield):**
   - Auth service context execution, JWT strategy implementations, Role guards, and Swagger integrations.
 - ❌ **[PHASE 3] Core Domain (Inventory Flow):**
