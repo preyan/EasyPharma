@@ -13,3 +13,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - chore(core): add toolkit setup properly matching globals
 - chore(setup): merge scripts and configure baseline setup
 - fix(scripts): harden all scripts — correct shebang, taskkill guards, input validation, and remove phantom CLI calls
+- fix(ci): bump node to 22, fix pnpm action v4, modernize nx affected syntax, remove phantom targets

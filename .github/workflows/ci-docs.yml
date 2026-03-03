@@ -1,14 +1,33 @@
 name: MNC Compliance & Docs
+
 on: [push]
+
+permissions:
+  actions: read
+  contents: read
+
 jobs:
   compliance:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - run: pnpm install
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: nrwl/nx-set-shas@v4
+
       - name: Verify Builds & Quality
         run: |
-          pnpm nx affected:build
-          pnpm nx affected:test
-          pnpm run docs:gen
+          pnpm nx affected -t build
+          pnpm nx affected -t test
