@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🧪 Running Quality Gate (Lint & Test)..."
+pnpm nx affected:lint --uncommitted
+pnpm nx affected:test --uncommitted

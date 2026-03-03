@@ -1,0 +1,14 @@
+name: MNC Compliance & Docs
+on: [push]
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - run: pnpm install
+      - name: Verify Builds & Quality
+        run: |
+          pnpm nx affected:build
+          pnpm nx affected:test
+          pnpm run docs:gen
