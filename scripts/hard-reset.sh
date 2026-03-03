@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # 1. Kill all hidden Node and Nx background processes
 taskkill //F //IM node.exe //T
 taskkill //F //IM nx.exe //T

@@ -6,15 +6,12 @@ EasyPharma: Phase-Locked Production Roadmap
 🛠 Operational Protocol (Strict Enforcement)
 The Agent must adhere to these rules for every single sub-task:
 
-Atomic Commits: Commit to main immediately after completing one sub-task. Never bundle tasks.
-
-Commit Format: Conventional Commits with a detailed body.
-
-Changelog: Update CHANGELOG.md following Keep a Changelog.
-
-Version Bump: Increment version in root package.json after every commit.
-
-Gatekeeper Rule: Upon completing all tasks in a Phase, the agent must perform a Phase Audit and then STOP. The agent is strictly forbidden from starting the next phase without a manual prompt: "Proceed to Phase X."
+## 🛠 Operational Protocol (Strict Enforcement)
+1. **Atomic Commits**: Commit to `main` after every sub-task.
+2. **Script Location**: Any automation script created during setup must be placed in `/scripts`.
+3. **Context Reporting**: Output context window size after every terminal execution.
+4. **Version & Changelog**: Increment version and update `CHANGELOG.md` (Keep a Changelog) per commit.
+5. **Gatekeeper Rule**: Audit and STOP after each Phase. Await: "Proceed to Phase X."
 
 [PHASE 1] - Infrastructure & Workspace (The Skeleton)
 Goal: A zero-error, library-first Nx Monorepo.

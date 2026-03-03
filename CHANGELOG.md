@@ -9,3 +9,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initialized Nx Integrated Workspace with pnpm.
 - Added `@nx/workspace`, `nx`, and `typescript` as devDependencies.
+- build: implement test and diagnostics toolkit scripts
