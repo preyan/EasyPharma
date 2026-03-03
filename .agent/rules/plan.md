@@ -8,7 +8,7 @@ The Agent must adhere to these rules for every single sub-task:
 
 ## 🛠 Operational Protocol (Strict Enforcement)
 
-1. **Atomic Commits**: Commit to `main` after every sub-task.
+1. **Atomic Commits**: Commit to `develop` after every sub-task. `main` is locked.
 2. **Script Location**: Any automation script created during setup must be placed in `/scripts`.
 3. **Context Reporting**: Output context window size after every terminal execution.
 4. **Version & Changelog**: Increment version and update `CHANGELOG.md` (Keep a Changelog) per commit.
