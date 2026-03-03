@@ -1,18 +1,59 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
-    "build": { "cache": true, "dependsOn": ["^build"], "inputs": ["production", "^production"] },
-    "test": { "cache": true, "inputs": ["default", "^default", "{workspaceRoot}/vitest.config.ts"] },
-    "lint": { "cache": true }
+    "build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "test": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/vitest.config.ts"
+      ]
+    },
+    "lint": {
+      "cache": true
+    }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/.eslintrc.json", "!{projectRoot}/vitest.config.ts"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/vitest.config.ts"
+    ],
     "sharedGlobals": []
   },
-  "plugins": ["@nx/angular", "@nx/nest"],
+  "plugins": [
+    "@nx/angular",
+    "@nx/nest"
+  ],
   "generators": {
-    "@nx/angular:library": { "tags": ["scope:client", "type:feature"] },
-    "@nx/nest:library": { "tags": ["scope:api", "type:feature"] }
-  }
+    "@nx/angular:library": {
+      "tags": [
+        "scope:client",
+        "type:feature"
+      ]
+    },
+    "@nx/nest:library": {
+      "tags": [
+        "scope:api",
+        "type:feature"
+      ]
+    }
+  },
+  "nxCloudId": "69a6b43713cd521ca9db2e1d"
 }

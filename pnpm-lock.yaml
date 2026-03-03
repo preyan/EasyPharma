@@ -12,7 +12,7 @@ importers:
         specifier: ^22.5.3
         version: 22.5.3
       nx:
-        specifier: ^22.5.3
+        specifier: 22.5.3
         version: 22.5.3
       typescript:
         specifier: ^5.9.3
