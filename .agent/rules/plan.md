@@ -8,7 +8,7 @@ The Agent must adhere to these rules for every single sub-task:
 
 ## 🛠 Operational Protocol (Strict Enforcement)
 
-1. **Atomic Commits**: Commit to `main` after every sub-task.
+1. **Atomic Commits**: Commit to `develop` after every sub-task. `main` is locked.
 2. **Script Location**: Any automation script created during setup must be placed in `/scripts`.
 3. **Context Reporting**: Output context window size after every terminal execution.
 4. **Version & Changelog**: Increment version and update `CHANGELOG.md` (Keep a Changelog) per commit.
@@ -80,6 +80,8 @@ Goal: Production-grade error handling and logging.
 [ ] Task 5.3: Add NestJS Health Checks (/health) via @nestjs/terminus → https://github.com/preyan/EasyPharma/issues/30.
 
 [ ] Task 5.4: Configure Winston/Pino for structured logging → https://github.com/preyan/EasyPharma/issues/31.
+
+[ ] Task 5.5: Implement Background Task Scheduling (@nestjs/schedule) for Cron Jobs → https://github.com/preyan/EasyPharma/issues/46. - [ ] Expiry Sentinel (Daily drug expiry scanning) - [ ] Low-Stock Watchdog (Twice-daily inventory threshold checks) - [ ] Automated Session/Token Cleanup - [ ] Daily Operational Summary Aggregation - [ ] Audit Log Archiving (Weekly)
 
 [ ] PHASE 5 AUDIT: Simulate API failures to verify error UI. STOP HERE.
 
