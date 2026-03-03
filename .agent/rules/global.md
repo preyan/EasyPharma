@@ -64,3 +64,19 @@ trigger: always_on
 - **Commit Referencing**: Every commit intended to fix an issue MUST include `Fixes #<IssueNumber>` or `Refs #<IssueNumber>` in the FIRST line of the commit message.
 - **State Sync**: Update the local `plan.md` task by appending the GitHub Issue URL next to the task item for immediate visibility.
 - **Self-Healing AI Oversight**: If 'Nx Self-Healing' suggests a fix for a test, the agent must verify the fix doesn't use `any` types or bypass security guards to make the test pass.
+
+# GitHub Documentation Loop
+
+- **Wiki & Docs**: Significant architectural decisions (ADRs) must be committed to `/docs` and referenced in the GitHub Issue body.
+- **Issue Closing**: When a task is completed, the agent must comment on the related GitHub Issue with a summary of the fix and the final commit hash before closing it.
+- **Plan Sync**: The `plan.md` in the repository must always reflect the current state of GitHub Issues. If an issue is open, the task in `plan.md` must be marked as `[IN PROGRESS - #IssueNum]`.
+- **Labels as Metadata**: Use labels (`phase:1`, `phase:2`, etc.) to map issues directly to the Roadmap phases in GitHub Projects/Issues.
+
+# GitHub Project Automation
+
+- **Project Board Sync**: The agent must track tasks on the 'EasyPharma' GitHub Project board.
+- **Task Lifecycle**:
+  - **Start**: When beginning a task from `plan.md`, move the corresponding GitHub Issue to 'In Progress'.
+  - **Block**: If an issue is created via `scripts/report-blocker.sh`, it must be added to the 'Blocked' or 'To Do' column with the 'bug' label.
+  - **Finish**: Upon successful commit and push, move the issue to 'Done'.
+- **Automation**: Use `gh project item-add` and `gh project item-edit` to manage these movements.
