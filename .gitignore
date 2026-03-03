@@ -7,3 +7,6 @@ node_modules
 .angular
 
 __screenshots__/
+
+vitest.config.*.timestamp*
+/generated/prisma
