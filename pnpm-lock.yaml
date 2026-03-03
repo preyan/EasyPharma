@@ -58,8 +58,8 @@ importers:
         specifier: ~21.1.0
         version: 21.1.5
       '@angular-devkit/schematics':
-        specifier: ~21.1.0
-        version: 21.1.5
+        specifier: ~21.2.0
+        version: 21.2.0
       '@angular/build':
         specifier: ~21.1.0
         version: 21.1.5(@angular/compiler-cli@21.1.6(@angular/compiler@21.1.6)(typescript@5.9.3))(@angular/compiler@21.1.6)(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2))(@angular/platform-browser@21.1.6(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)))(@types/node@20.19.9)(jiti@2.6.1)(less@4.5.1)(postcss@8.5.8)(sass-embedded@1.97.3)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)(vitest@4.0.18(@types/node@20.19.9)(jiti@2.6.1)(jsdom@27.4.0)(less@4.5.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(yaml@2.8.2)
@@ -83,7 +83,7 @@ importers:
         version: 11.1.14(@nestjs/common@11.1.14(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/core@11.1.14)(@nestjs/platform-express@11.1.14)
       '@nx/angular':
         specifier: ^22.5.3
-        version: 22.5.3(c286fbd183f8228ede87ccc4c8c60375)
+        version: 22.5.3(7e4aa1bfdf52d768977d8fda42dc942c)
       '@nx/devkit':
         specifier: 22.5.3
         version: 22.5.3(nx@22.5.3(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19)))
@@ -319,6 +319,10 @@ packages:
 
   '@angular-devkit/schematics@21.1.5':
     resolution: {integrity: sha512-CGmoorQL5+mVCJEHwHWOrhSd1hFxB3h66i9wUDizJAEQUM3mSml5SiglHArpWY/G4GmFwi6XVe+Jm3U8J/mcFg==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+
+  '@angular-devkit/schematics@21.2.0':
+    resolution: {integrity: sha512-3kn3FI5v7BQ7Zct6raek+WgvyDwOJ8wElbyC903GxMQCDBRGGcevhHvTAIHhknihEsrgplzPhTlWeMbk1JfdFg==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
 
   '@angular-eslint/builder@21.2.0':
@@ -4361,6 +4365,10 @@ packages:
     resolution: {integrity: sha512-x/5fWmGMnbKQAaNwN+UZlV79qBLM9JFnJuJ03gIi5whrob0xV0ofNVHy9DhwGdsMJQc2OKv0oGmLzvaqvAVv+g==}
     engines: {node: '>=6'}
 
+  cli-spinners@2.9.2:
+    resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
+    engines: {node: '>=6'}
+
   cli-spinners@3.4.0:
     resolution: {integrity: sha512-bXfOC4QcT1tKXGorxL3wbJm6XJPDqEnij2gQ2m7ESQuE+/z9YFIWnl/5RpTiKWbMq3EVKR4fRLJGn6DVfu0mpw==}
     engines: {node: '>=18.20'}
@@ -6615,6 +6623,10 @@ packages:
     resolution: {integrity: sha512-m0pg2zscbYgWbqRR6ABga5c3sZdEon7bSgjnlXC64kxtxLOyjRcbbUkLj7HFyy/FTD+P2xdBWu8snGhYI0jc4A==}
     engines: {node: '>=20'}
 
+  ora@9.3.0:
+    resolution: {integrity: sha512-lBX72MWFduWEf7v7uWf5DHp9Jn5BI8bNPGuFgtXMmr2uDz2Gz2749y3am3agSDdkhHPHYmmxEGSKH85ZLGzgXw==}
+    engines: {node: '>=20'}
+
   ordered-binary@1.6.1:
     resolution: {integrity: sha512-QkCdPooczexPLiXIrbVOPYkR3VO3T6v2OyKRkR1Xbhpy7/LAVXwahnRCgRp78Oe/Ehf0C/HATAxfSr6eA1oX+w==}
 
@@ -7711,6 +7723,10 @@ packages:
     resolution: {integrity: sha512-UhDfHmA92YAlNnCfhmq0VeNL5bDbiZGg7sZ2IvPsXubGkiNa9EC+tUTsjBRsYUAz87btI6/1wf4XoVvQ3uRnmQ==}
     engines: {node: '>=18'}
 
+  stdin-discarder@0.3.1:
+    resolution: {integrity: sha512-reExS1kSGoElkextOcPkel4NE99S0BWxjUHQeDFnR8S993JxpPX7KU4MNmO19NXhlJp+8dmdCbKQVNgLJh2teA==}
+    engines: {node: '>=18'}
+
   streamroller@3.1.5:
     resolution: {integrity: sha512-KFxaM7XT+irxvdqSP1LGLgNWbYN7ay5owZ3r/8t77p+EtSUAfUgtl7be3xtqtOmGUl9K9YPO2ca8133RlTjvKw==}
     engines: {node: '>=8.0'}
@@ -8750,6 +8766,16 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
+  '@angular-devkit/schematics@21.2.0':
+    dependencies:
+      '@angular-devkit/core': 21.2.0
+      jsonc-parser: 3.3.1
+      magic-string: 0.30.21
+      ora: 9.3.0
+      rxjs: 7.8.2
+    transitivePeerDependencies:
+      - chokidar
+
   '@angular-eslint/builder@21.2.0(@angular/cli@21.1.5(@types/node@20.19.9))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@angular-devkit/architect': 0.2102.0
@@ -8786,7 +8812,7 @@ snapshots:
   '@angular-eslint/schematics@21.2.0(@angular-eslint/template-parser@21.2.0(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(@angular/cli@21.1.5(@types/node@20.19.9))(@typescript-eslint/types@8.56.1)(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@angular-devkit/core': 21.1.5
-      '@angular-devkit/schematics': 21.1.5
+      '@angular-devkit/schematics': 21.2.0
       '@angular-eslint/eslint-plugin': 21.2.0(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
       '@angular-eslint/eslint-plugin-template': 21.2.0(@angular-eslint/template-parser@21.2.0(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/types@8.56.1)(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
       '@angular/cli': 21.1.5(@types/node@20.19.9)
@@ -11248,10 +11274,10 @@ snapshots:
     dependencies:
       consola: 3.4.2
 
-  '@nx/angular@22.5.3(c286fbd183f8228ede87ccc4c8c60375)':
+  '@nx/angular@22.5.3(7e4aa1bfdf52d768977d8fda42dc942c)':
     dependencies:
       '@angular-devkit/core': 21.1.5
-      '@angular-devkit/schematics': 21.1.5
+      '@angular-devkit/schematics': 21.2.0
       '@nx/devkit': 22.5.3(nx@22.5.3(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19)))
       '@nx/eslint': 22.5.3(@babel/traverse@7.29.0)(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19))(@zkochan/js-yaml@0.0.7)(eslint@9.39.3(jiti@2.6.1))(nx@22.5.3(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19)))
       '@nx/js': 22.5.3(@babel/traverse@7.29.0)(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19))(nx@22.5.3(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19)))
@@ -13039,7 +13065,7 @@ snapshots:
   angular-eslint@21.2.0(@angular/cli@21.1.5(@types/node@20.19.9))(eslint@9.39.3(jiti@2.6.1))(typescript-eslint@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
       '@angular-devkit/core': 21.1.5
-      '@angular-devkit/schematics': 21.1.5
+      '@angular-devkit/schematics': 21.2.0
       '@angular-eslint/builder': 21.2.0(@angular/cli@21.1.5(@types/node@20.19.9))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
       '@angular-eslint/eslint-plugin': 21.2.0(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
       '@angular-eslint/eslint-plugin-template': 21.2.0(@angular-eslint/template-parser@21.2.0(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/types@8.56.1)(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
@@ -13513,6 +13539,8 @@ snapshots:
       restore-cursor: 5.1.0
 
   cli-spinners@2.6.1: {}
+
+  cli-spinners@2.9.2: {}
 
   cli-spinners@3.4.0: {}
 
@@ -16129,7 +16157,7 @@ snapshots:
       bl: 4.1.0
       chalk: 4.1.2
       cli-cursor: 3.1.0
-      cli-spinners: 2.6.1
+      cli-spinners: 2.9.2
       is-interactive: 1.0.0
       is-unicode-supported: 0.1.0
       log-symbols: 4.1.0
@@ -16147,6 +16175,17 @@ snapshots:
       stdin-discarder: 0.2.2
       string-width: 8.2.0
       strip-ansi: 7.2.0
+
+  ora@9.3.0:
+    dependencies:
+      chalk: 5.6.2
+      cli-cursor: 5.0.0
+      cli-spinners: 3.4.0
+      is-interactive: 2.0.0
+      is-unicode-supported: 2.1.0
+      log-symbols: 7.0.1
+      stdin-discarder: 0.3.1
+      string-width: 8.2.0
 
   ordered-binary@1.6.1:
     optional: true
@@ -17285,6 +17324,8 @@ snapshots:
   std-env@3.10.0: {}
 
   stdin-discarder@0.2.2: {}
+
+  stdin-discarder@0.3.1: {}
 
   streamroller@3.1.5:
     dependencies:
