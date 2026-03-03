@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nx run-many -t test",
-    "prepare": "husky"
+    "prepare": "node -e \"if (process.env.CI) process.exit(0); require('child_process').execSync('husky', {stdio: 'inherit'});\""
   },
   "keywords": [],
   "author": "",
