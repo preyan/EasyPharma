@@ -2,6 +2,14 @@
 
 > A modern, phase-locked, zero-error enterprise pharmacy management system built as a library-first Nx Monorepo.
 
+![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg?style=for-the-badge&logo=node.js&logoColor=white)
+![Nx](https://img.shields.io/badge/Nx-Workspace-blue.svg?style=for-the-badge&logo=nx&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-21%20LTS-dd0031.svg?style=for-the-badge&logo=angular&logoColor=white)
+![NestJS](https://img.shields.io/badge/NestJS-11%20LTS-e0234e.svg?style=for-the-badge&logo=nestjs&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-7-2d3748.svg?style=for-the-badge&logo=prisma&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-E2E-2EAD33.svg?style=for-the-badge&logo=playwright&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-Testing-FCC72B.svg?style=for-the-badge&logo=vitest&logoColor=white)
+
 Welcome to **EasyPharma**, an advanced pharmaceutical inventory and management application. This project is engineered with high scalability, resilience, and strict coding standards meant for production-grade environments.
 
 ---
