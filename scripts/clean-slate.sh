@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "🧹 Cleaning Workspace..."
-taskkill //F //IM node.exe //T 2>/dev/null
+taskkill //F //IM node.exe //T 2>/dev/null || true
 rm -rf .nx/cache
 rm -rf node_modules/.cache
 export LC_ALL=en_US.UTF-8

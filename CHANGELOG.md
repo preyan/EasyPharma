@@ -10,3 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initialized Nx Integrated Workspace with pnpm.
 - Added `@nx/workspace`, `nx`, and `typescript` as devDependencies.
 - build: implement test and diagnostics toolkit scripts
+- chore(core): add toolkit setup properly matching globals
+- chore(setup): merge scripts and configure baseline setup
+- fix(scripts): harden all scripts — correct shebang, taskkill guards, input validation, and remove phantom CLI calls

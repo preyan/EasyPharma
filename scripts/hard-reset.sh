@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 # 1. Kill all hidden Node and Nx background processes
-taskkill //F //IM node.exe //T
-taskkill //F //IM nx.exe //T
+taskkill //F //IM node.exe //T 2>/dev/null || true
+taskkill //F //IM nx.exe //T 2>/dev/null || true
 
 # 2. Wipe the "Corrupted" artifacts
 # This removes the locked node_modules and the broken Nx cache

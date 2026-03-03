@@ -16,4 +16,4 @@ done
 # Check current branch and dirty state
 git status --short
 
-echo "🧠 [Context Usage: $(antigravity --tokens --current) / $(antigravity --tokens --max)]"
+echo "🧠 [Context Usage: N/A (tracked by agent internally)]"

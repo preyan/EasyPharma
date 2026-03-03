@@ -1,6 +1,5 @@
 #!/bin/bash
-# Mock-up for Antigravity Context Reporting
-# In 2026, most agents respond to internal stats commands
+# Context Usage Reporter for EasyPharma
 echo "--------------------------------"
-echo "🧠 [Context Usage: $(antigravity --tokens --current) / $(antigravity --tokens --max)]"
+echo "🧠 [Context Usage: N/A (tracked by agent internally)]"
 echo "--------------------------------"

@@ -8,7 +8,8 @@ node -v && pnpm -v
 # Clear zombie workers
 pnpm nx reset
 
-# Verify Nx Graph integrity
+# Verify Nx Graph integrity (ensure output dir exists first)
+mkdir -p scripts
 pnpm nx graph --file=scripts/tmp-graph.json && rm scripts/tmp-graph.json
 
-echo "✅ Environment is STABLE. [Context: $(antigravity --tokens --current)]"
+echo "✅ Environment is STABLE. [Context: N/A (tracked by agent internally)]"
