@@ -55,8 +55,8 @@ importers:
         version: 5.0.1(express@5.2.1)
     devDependencies:
       '@angular-devkit/core':
-        specifier: ~21.1.0
-        version: 21.1.5
+        specifier: ~21.2.0
+        version: 21.2.0
       '@angular-devkit/schematics':
         specifier: ~21.1.0
         version: 21.1.5
@@ -83,7 +83,7 @@ importers:
         version: 11.1.14(@nestjs/common@11.1.14(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/core@11.1.14)(@nestjs/platform-express@11.1.14)
       '@nx/angular':
         specifier: ^22.5.3
-        version: 22.5.3(c286fbd183f8228ede87ccc4c8c60375)
+        version: 22.5.3(2b9cdeffb4ebbf8d847cc85eb44dd233)
       '@nx/devkit':
         specifier: 22.5.3
         version: 22.5.3(nx@22.5.3(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19)))
@@ -8753,7 +8753,7 @@ snapshots:
   '@angular-eslint/builder@21.2.0(@angular/cli@21.1.5(@types/node@20.19.9))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@angular-devkit/architect': 0.2102.0
-      '@angular-devkit/core': 21.1.5
+      '@angular-devkit/core': 21.2.0
       '@angular/cli': 21.1.5(@types/node@20.19.9)
       eslint: 9.39.3(jiti@2.6.1)
       typescript: 5.9.3
@@ -8785,7 +8785,7 @@ snapshots:
 
   '@angular-eslint/schematics@21.2.0(@angular-eslint/template-parser@21.2.0(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(@angular/cli@21.1.5(@types/node@20.19.9))(@typescript-eslint/types@8.56.1)(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
-      '@angular-devkit/core': 21.1.5
+      '@angular-devkit/core': 21.2.0
       '@angular-devkit/schematics': 21.1.5
       '@angular-eslint/eslint-plugin': 21.2.0(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
       '@angular-eslint/eslint-plugin-template': 21.2.0(@angular-eslint/template-parser@21.2.0(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/types@8.56.1)(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
@@ -11248,9 +11248,9 @@ snapshots:
     dependencies:
       consola: 3.4.2
 
-  '@nx/angular@22.5.3(c286fbd183f8228ede87ccc4c8c60375)':
+  '@nx/angular@22.5.3(2b9cdeffb4ebbf8d847cc85eb44dd233)':
     dependencies:
-      '@angular-devkit/core': 21.1.5
+      '@angular-devkit/core': 21.2.0
       '@angular-devkit/schematics': 21.1.5
       '@nx/devkit': 22.5.3(nx@22.5.3(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19)))
       '@nx/eslint': 22.5.3(@babel/traverse@7.29.0)(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19))(@zkochan/js-yaml@0.0.7)(eslint@9.39.3(jiti@2.6.1))(nx@22.5.3(@swc-node/register@1.11.1(@swc/core@1.15.18(@swc/helpers@0.5.19))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.18(@swc/helpers@0.5.19)))
@@ -13038,7 +13038,7 @@ snapshots:
 
   angular-eslint@21.2.0(@angular/cli@21.1.5(@types/node@20.19.9))(eslint@9.39.3(jiti@2.6.1))(typescript-eslint@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
-      '@angular-devkit/core': 21.1.5
+      '@angular-devkit/core': 21.2.0
       '@angular-devkit/schematics': 21.1.5
       '@angular-eslint/builder': 21.2.0(@angular/cli@21.1.5(@types/node@20.19.9))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
       '@angular-eslint/eslint-plugin': 21.2.0(@typescript-eslint/utils@8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
