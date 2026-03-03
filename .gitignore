@@ -1,12 +1,54 @@
-node_modules
-
-
-
+# Nx
 .nx/cache
 .nx/workspace-data
-.angular
 
+# Angular
+.angular/
+
+# Node
+node_modules/
+dist/
+build/
+.pnpm-debug.log*
+pnpm-debug.log*
+
+# Testing & Coverage
+coverage/
+junit.xml
 __screenshots__/
-
 vitest.config.*.timestamp*
-/generated/prisma
+.vitest-reports/
+
+# IDEs
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+bak.
+*.bak
+
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Temporary
+tmp/
+temp/
+logs/
+*.log
+
+# Prisma
+/generated/prisma/
+schema.prisma.bak
