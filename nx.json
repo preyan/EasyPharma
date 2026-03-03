@@ -3,20 +3,34 @@
   "targetDefaults": {
     "build": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
     "test": {
       "cache": true,
-      "inputs": ["default", "^default", "{workspaceRoot}/vitest.config.ts"]
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/vitest.config.ts"
+      ]
     },
     "lint": {
       "cache": true
     },
     "@angular/build:application": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
     "@nx/eslint:lint": {
       "cache": true,
@@ -29,16 +43,27 @@
     },
     "@angular/build:unit-test": {
       "cache": true,
-      "inputs": ["default", "^production"]
+      "inputs": [
+        "default",
+        "^production"
+      ]
     },
     "@nx/js:tsc": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -81,7 +106,9 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/api-e2e/**/*"]
+      "exclude": [
+        "apps/api-e2e/**/*"
+      ]
     },
     {
       "plugin": "@nx/vitest",
@@ -94,10 +121,16 @@
   ],
   "generators": {
     "@nx/angular:library": {
-      "tags": ["scope:client", "type:feature"]
+      "tags": [
+        "scope:client",
+        "type:feature"
+      ]
     },
     "@nx/nest:library": {
-      "tags": ["scope:api", "type:feature"]
+      "tags": [
+        "scope:api",
+        "type:feature"
+      ]
     },
     "@nx/angular:application": {
       "e2eTestRunner": "playwright",
@@ -105,6 +138,5 @@
       "style": "css",
       "unitTestRunner": "vitest-angular"
     }
-  },
-  "nxCloudId": "69a6b4d4f53cc157d6971af9"
+  }
 }
