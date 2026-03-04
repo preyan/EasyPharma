@@ -77,49 +77,6 @@
     ],
     "sharedGlobals": []
   },
-  "plugins": [
-    {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
-      }
-    },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
-    {
-      "plugin": "@nx/webpack/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "serveTargetName": "serve",
-        "previewTargetName": "preview",
-        "buildDepsTargetName": "build-deps",
-        "watchDepsTargetName": "watch-deps",
-        "serveStaticTargetName": "serve-static"
-      }
-    },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test"
-      },
-      "exclude": [
-        "apps/api-e2e/**/*",
-        "."
-      ]
-    },
-    {
-      "plugin": "@nx/vitest",
-      "options": {
-        "testTargetName": "test",
-        "ciTargetName": "test-ci",
-        "testMode": "watch"
-      }
-    }
-  ],
   "generators": {
     "@nx/angular:library": {
       "tags": [

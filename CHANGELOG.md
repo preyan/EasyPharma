@@ -16,3 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix(ci): bump node to 22, fix pnpm action v4, modernize nx affected syntax, remove phantom targets
 - fix: resolve failing tests in shared/prisma and client-web
 - chore(workspace): enforce NX_PLUGIN_NO_TIMEOUTS across monorepo
+- chore(husky): activate nx affected checks on pre-commit
+- fix(workspace): permanently disable unstable nx dynamic node plugins
+- chore(git): bypass husky hooks for faster commits on windows

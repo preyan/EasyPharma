@@ -6,5 +6,5 @@ export NX_ISOLATE_PLUGINS=false
 export NX_PLUGIN_NO_TIMEOUTS=true
 
 # Run only against affected projects (not the entire monorepo)
-# pnpm nx affected -t lint --base=HEAD~1
-# pnpm nx affected -t test --base=HEAD~1
+pnpm nx affected -t lint --base=HEAD~1
+pnpm nx affected -t test --base=HEAD~1
