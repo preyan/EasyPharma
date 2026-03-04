@@ -16,6 +16,14 @@
 - **`develop`**: The active development branch. Features and fixes are merged here.
 - **`main`**: The production branch. Changes are merged here only at the end of a Phase Audit.
 - **Release PRs**: Always create a PR from `develop` to `main` for Phase promotions, including a full verification summary and screenshots.
+- **Required Status Checks**: No Pull Request should be merged unless the following major CI pipelines pass:
+  - `CI` (Build, Test, Lint)
+  - `Compliance & Docs`
+  - `Secret Scanning`
+  - `CodeQL`
+  - `Bundle Size Check`
+  - `PR Enforcer`
+  - `Coverage Badge`
 
 ## Automation Script: `scripts/atomic-commit.sh`
 
