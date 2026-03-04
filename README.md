@@ -1,6 +1,7 @@
 # 💊 EasyPharma Workspace
 
 <!-- BADGES:START -->
+
 ![Version](https://img.shields.io/badge/version-v1.1.0-blue)
 ![Issues](https://img.shields.io/github/issues/preyan/EasyPharma)
 ![License](https://img.shields.io/badge/license-Proprietary-red)
@@ -8,6 +9,7 @@
 ![Angular](https://img.shields.io/badge/Angular-21-dd0031)
 ![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)
 ![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)
+
 <!-- BADGES:END -->
 
 > **A secure, phase-locked, and resilient enterprise API and Client solution natively constructed in an Nx Monorepo.**
@@ -32,18 +34,17 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 
 <!-- ACTIONS:START -->
 
-| Workflow              | Status                                                                                                                                  |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| **CI**                | ![CI](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci.yml?branch=develop&label=status)                       |
-| **Compliance & Docs** | ![Compliance](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci-docs.yml?branch=develop&label=status)          |
-| **CodeQL**            | ![CodeQL](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/codeql.yml?branch=develop&label=status)               |
-| **Secret Scanning**   | ![Secret Scan](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/secret-scanning.yml?branch=develop&label=status) |
-| **Issue Automation**  | ![Issues](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/issue-tracker.yml?branch=develop&label=status)        |
-| **Coverage**          | ![Coverage](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/coverage.yml?branch=develop&label=status)           |
-| **Broken Links**      | ![Links](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/broken-links.yml?branch=develop&label=status)          |
-| **Health Check**      | ![Health](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/health-check.yml?branch=develop&label=status)         |
-| **Dynamic README**    | ![README](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/readme-update.yml?branch=develop&label=status)        |
-| **Stale Closer**      | ![Stale](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/stale.yml?branch=develop&label=status)                 |
+| Workflow               | Status                                                                                                                                  |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **Release Automation** | ![Release](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/release-automation.yml?branch=develop&label=status)  |
+| **CI**                 | ![CI](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci.yml?branch=develop&label=status)                       |
+| **Compliance & Docs**  | ![Compliance](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci-docs.yml?branch=develop&label=status)          |
+| **CodeQL**             | ![CodeQL](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/codeql.yml?branch=develop&label=status)               |
+| **Secret Scanning**    | ![Secret Scan](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/secret-scanning.yml?branch=develop&label=status) |
+| **Coverage**           | ![Coverage](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/coverage.yml?branch=develop&label=status)           |
+| **Broken Links**       | ![Links](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/broken-links.yml?branch=develop&label=status)          |
+| **Health Check**       | ![Health](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/health-check.yml?branch=develop&label=status)         |
+| **Stale Closer**       | ![Stale](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/stale.yml?branch=develop&label=status)                 |
 
 <!-- ACTIONS:END -->
 
@@ -52,13 +53,15 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 ## Repository Stats
 
 <!-- STATS:START -->
-| Metric | Value |
-|---|---|
-| ⭐ Stars | 0 |
-| 🐛 Open Issues | 40 |
-| ✅ Closed Issues | 78 |
-| 🔀 Merged PRs | 0 |
-| 📝 Lines of Code | 458 |
+
+| Metric           | Value |
+| ---------------- | ----- |
+| ⭐ Stars         | 0     |
+| 🐛 Open Issues   | 40    |
+| ✅ Closed Issues | 78    |
+| 🔀 Merged PRs    | 0     |
+| 📝 Lines of Code | 458   |
+
 <!-- STATS:END -->
 
 ---
