@@ -14,16 +14,10 @@ if [ ! -z "$ISSUE_NUM" ]; then
   COMMIT_MSG="$MESSAGE\n\nFixes #$ISSUE_NUM"
 fi
 
-# 1. Version Bump (Patch)
-pnpm version patch --no-git-tag-version
-
-# 2. Update Changelog
-echo "- $MESSAGE" >> CHANGELOG.md
-
-# 3. Commit
+# 1. Commit
 git add .
 git commit --no-verify -m "$(echo -e "$COMMIT_MSG")"
 
-# 4. Push to upstream
+# 2. Push to upstream (GitHub Actions handles versioning, changelog, and issue tracking)
 git push
-echo "🚀 Committed, Bumped & Pushed. [Context: CI will handle issue tracking]"
+echo "🚀 Committed & Pushed. [CI handles versioning, changelog, and issue tracking]"
