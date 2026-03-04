@@ -1,25 +1,25 @@
-# EasyPharma Global Rules
+# EasyPharma Documentation Hub
 
-## Deployment & Sync Protocol
+Welcome to the official documentation for the EasyPharma Workspace. This project is built under an **absolute zero-error threshold** and follows strict architectural protocols.
 
-- **Pull Before Push**: Always perform `git pull --rebase` before pushing to avoid non-fast-forward rejections. This is natively enforced in `scripts/atomic-commit.sh`.
-- **Atomic Commits**: Commit to `develop` after every sub-task. Incremental, atomic changes only.
-- **Main Protection**: The `main` branch is reserved for production-ready Phase releases only.
+## 🏛️ Project Architecture
 
-## Technical Standards
+- **[Phase-Locked Roadmap](architecture/roadmap.md)**: Our 8-Phase sequence from skeleton to production scale.
 
-- **LTS Strictness**: Use Angular 21.x and NestJS 11.x (Express).
-- **Architecture**: Nx Monorepo with Domain-Driven Design (DDD).
-- **ORM**: Prisma 7 (Schema-first).
-- **Testing**: Vitest for Unit/Integration and Playwright for E2E. Minimum 80% coverage required.
+## 📐 Standards & Protocols
 
-## Workflow Automation
+- **[Git & Commit Workflow](standards/git-workflow.md)**: Conventional commits, pull-before-push, and atomic deployment rules.
+- **[Frontend Standards](standards/frontend.md)**: Angular 21, Signals, Zoneless, and premium UI criteria.
+- **[Backend Standards](standards/backend.md)**: NestJS 11, Express, Prisma 7, and Zod validation.
+- **[Security Protocols](standards/security.md)**: OIDC, JWT, RBAC, and PII protection rules.
 
-- **Conventional Commits**: All commit messages must follow the `feat/fix/chore(scope): description` format.
-- **Auto-Issue Tracking**: GitHub Actions automatically creates, links, and closes issues based on commit messages.
-- **Version Management**: Automated by CI for every push to `develop`.
+## 🛠️ Operational Rules
 
-## Environment
+1. **LTS Only**: Strictly Angular 21.x and NestJS 11.x.
+2. **Library-First**: All domain logic lives in `/libs`.
+3. **Automated Hygiene**: CI/CD handles linting, testing, and documentation generation.
+4. **Pull Before Push**: Enforced via `scripts/atomic-commit.sh` to prevent race conditions.
 
-- **Shell**: Git Bash (MINGW64) is the mandatory shell for all scripts and terminal commands.
-- **Execution**: All automation scripts must reside in `/scripts`.
+---
+
+_Developed under absolute zero-error threshold coding standards._
