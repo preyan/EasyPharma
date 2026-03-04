@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+
+## [1.0.11] - 2026-03-04
+
+### Fixed
+- add pull_request triggers to missing workflows and fix syntax ([`442f6a5`](https://github.com/preyan/EasyPharma/commit/442f6a5ec5c24b2a04139b7568c931239e1bdbdd))
+
 ## [1.0.10] - 2026-03-04
 
 ### Changed
