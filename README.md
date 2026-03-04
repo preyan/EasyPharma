@@ -1,14 +1,15 @@
 # 💊 EasyPharma Workspace
 
 <!-- BADGES:START -->
+
 ![Version](https://img.shields.io/badge/version-v1.0.8-blue)
-![CI](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci.yml?branch=develop&label=CI)
 ![Issues](https://img.shields.io/github/issues/preyan/EasyPharma)
 ![License](https://img.shields.io/badge/license-Proprietary-red)
 ![Node](https://img.shields.io/badge/node-22_LTS-green)
 ![Angular](https://img.shields.io/badge/Angular-21-dd0031)
 ![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)
 ![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)
+
 <!-- BADGES:END -->
 
 > **A secure, phase-locked, and resilient enterprise API and Client solution natively constructed in an Nx Monorepo.**
@@ -20,21 +21,46 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 ## 📊 Project Progress
 
 <!-- PROGRESS:START -->
+
 | Phase 1 | Phase 2 | Phase 3 | Phase 4 | Phase 5 | Phase 6 | Phase 7 | Phase 8 |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
+|   ✅    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |
+
 <!-- PROGRESS:END -->
+
+---
+
+## 🔄 CI Pipeline Status
+
+<!-- ACTIONS:START -->
+
+| Workflow              | Status                                                                                                                                  |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **CI**                | ![CI](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci.yml?branch=develop&label=status)                       |
+| **Compliance & Docs** | ![Compliance](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci-docs.yml?branch=develop&label=status)          |
+| **CodeQL**            | ![CodeQL](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/codeql.yml?branch=develop&label=status)               |
+| **Secret Scanning**   | ![Secret Scan](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/secret-scanning.yml?branch=develop&label=status) |
+| **Issue Automation**  | ![Issues](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/issue-tracker.yml?branch=develop&label=status)        |
+| **Coverage**          | ![Coverage](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/coverage.yml?branch=develop&label=status)           |
+| **Broken Links**      | ![Links](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/broken-links.yml?branch=develop&label=status)          |
+| **Health Check**      | ![Health](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/health-check.yml?branch=develop&label=status)         |
+| **Dynamic README**    | ![README](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/readme-update.yml?branch=develop&label=status)        |
+| **Stale Closer**      | ![Stale](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/stale.yml?branch=develop&label=status)                 |
+
+<!-- ACTIONS:END -->
 
 ---
 
 ## 📈 Repository Stats
 
 <!-- STATS:START -->
-| Metric | Value |
-|---|---|
-| ⭐ Stars | 0 |
-| 🐛 Open Issues | 50 |
-| 📝 Lines of Code | 458 |
+
+| Metric           | Value |
+| ---------------- | ----- |
+| ⭐ Stars         | 0     |
+| 🐛 Open Issues   | 50    |
+| 📝 Lines of Code | 458   |
+
 <!-- STATS:END -->
 
 ---
@@ -73,15 +99,16 @@ _The landing page features a minimalist dark-mode dashboard, fluid gradients, an
 ## 🛠️ Technology Stack
 
 <!-- DEPS:START -->
-| Package | Version |
-|---|---|
-| `@angular/core` | `~21.1.0` |
-| `@angular/cli` | `~21.1.0` |
-| `@nestjs/core` | `^11.0.0` |
-| `@prisma/client` | `^7.4.2` |
-| `nx` | `22.5.3` |
-| `vitest` | `^4.0.8` |
-| `typescript` | `^5.9.3` |
+
+| Package          | Version   |
+| ---------------- | --------- |
+| `@angular/core`  | `~21.1.0` |
+| `@angular/cli`   | `~21.1.0` |
+| `@nestjs/core`   | `^11.0.0` |
+| `@prisma/client` | `^7.4.2`  |
+| `nx`             | `22.5.3`  |
+| `vitest`         | `^4.0.8`  |
+| `typescript`     | `^5.9.3`  |
 
 <!-- DEPS:END -->
 
@@ -136,7 +163,9 @@ Ensure you have Node 22+ and pnpm installed natively.
 ## 👥 Contributors
 
 <!-- CONTRIBUTORS:START -->
+
 <a href="https://github.com/preyan"><img src="https://avatars.githubusercontent.com/u/30199639?v=4" width="50" title="preyan"/></a>
+
 <!-- CONTRIBUTORS:END -->
 
 ---

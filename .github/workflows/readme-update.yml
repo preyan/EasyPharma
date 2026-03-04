@@ -35,7 +35,6 @@ jobs:
 
             const badges = [
               `![Version](https://img.shields.io/badge/version-v${version}-blue)`,
-              `![CI](https://img.shields.io/github/actions/workflow/status/${repo}/ci.yml?branch=develop&label=CI)`,
               `![Issues](https://img.shields.io/github/issues/${repo})`,
               `![License](https://img.shields.io/badge/license-Proprietary-red)`,
               `![Node](https://img.shields.io/badge/node-22_LTS-green)`,
