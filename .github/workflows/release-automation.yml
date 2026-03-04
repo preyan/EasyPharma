@@ -124,10 +124,26 @@ jobs:
               const repoData = await github.rest.repos.get({ owner: context.repo.owner, repo: context.repo.repo });
               const openIssues = repoData.data.open_issues_count;
               const stars = repoData.data.stargazers_count;
+
+              // Fetch Closed Issues and Merged PRs
+              const closedIssues = await github.rest.search.issuesAndPullRequests({ q: `repo:${repo} is:issue is:closed` });
+              const mergedPRs = await github.rest.search.issuesAndPullRequests({ q: `repo:${repo} is:pr is:merged` });
+
               const loc = execSync("find apps libs -name '*.ts' -not -path '*/node_modules/*' 2>/dev/null | xargs wc -l 2>/dev/null | tail -1 || echo '0 total'").toString().trim().split(' ')[0];
-              const statsTable = `| Metric | Value |\n|---|---|\n| ⭐ Stars | ${stars} |\n| 🐛 Open Issues | ${openIssues} |\n| 📝 Lines of Code | ${Number(loc).toLocaleString()} |`;
+              const statsTable = [
+                '| Metric | Value |',
+                '|---|---|',
+                `| ⭐ Stars | ${stars} |`,
+                `| 🐛 Open Issues | ${openIssues} |`,
+                `| ✅ Closed Issues | ${closedIssues.data.total_count} |`,
+                `| 🔀 Merged PRs | ${mergedPRs.data.total_count} |`,
+                `| 📝 Lines of Code | ${Number(loc).toLocaleString()} |`
+              ].join('\n');
+
               readme = readme.replace(/<!-- STATS:START -->[\s\S]*?<!-- STATS:END -->/, `<!-- STATS:START -->\n${statsTable}\n<!-- STATS:END -->`);
-            } catch (e) {}
+            } catch (e) {
+              console.log(`Stats update failed: ${e.message}`);
+            }
 
             fs.writeFileSync('README.md', readme);
 
