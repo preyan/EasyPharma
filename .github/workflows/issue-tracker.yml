@@ -12,12 +12,13 @@ permissions:
 jobs:
   automate-issues:
     runs-on: ubuntu-latest
+    if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PAT }}
 
       - uses: pnpm/action-setup@v4
         with:
