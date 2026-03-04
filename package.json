@@ -1,10 +1,9 @@
 {
   "name": "easy-pharma",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nx run-many -t test",
     "prepare": "node -e \"if (process.env.CI) process.exit(0); require('child_process').execSync('husky', {stdio: 'inherit'});\""
   },
   "keywords": [],

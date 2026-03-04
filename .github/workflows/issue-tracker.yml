@@ -60,6 +60,16 @@ jobs:
                 labels.push(`area:${scope}`);
               }
 
+              // Ensure all labels exist before assigning them
+              for (const label of labels) {
+                try {
+                  await github.rest.issues.getLabel({ owner: context.repo.owner, repo: context.repo.repo, name: label });
+                } catch {
+                  await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, name: label, color: 'ededed' });
+                  console.log(`Created missing label: ${label}`);
+                }
+              }
+
               let issueBody = subject;
               if (templateFile && fs.existsSync(templateFile)) {
                  // Open the template file and strip the Markdown frontmatter (---...---)
@@ -70,36 +80,44 @@ jobs:
                  issueBody = bodyWithoutFrontmatter.replace('- **Branch / Commit:**', `- **Commit:** ${commit.id}`);
               }
 
-              // 1. Create the Issue
-              const issueTitle = `[${type.toUpperCase()}]: ${subject}`;
-              console.log(`Creating issue: ${issueTitle}`);
-              
-              const newIssue = await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title: issueTitle,
-                body: issueBody,
-                labels: labels,
-                assignees: [commit.author.username || context.actor]
-              });
+              try {
+                // 1. Create the Issue
+                const issueTitle = `[${type.toUpperCase()}]: ${subject}`;
+                console.log(`Creating issue: ${issueTitle}`);
+                
+                const newIssue = await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: issueTitle,
+                  body: issueBody,
+                  labels: labels,
+                  assignees: [commit.author.username || context.actor]
+                });
 
-              console.log(`Issue Create Success -> #${newIssue.data.number}`);
+                console.log(`Issue Create Success -> #${newIssue.data.number}`);
 
-              // 2. Post a comment linking the Commit URL
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: newIssue.data.number,
-                body: `✅ **Automated Resolution**\nThis issue was automatically generated, addressed, and resolved by commit ${commit.url}`
-              });
+                // 2. Wait for GitHub to index the new issue before commenting
+                await new Promise(resolve => setTimeout(resolve, 2000));
 
-              // 3. Instantly Close the Issue
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: newIssue.data.number,
-                state: 'closed'
-              });
-              
-              console.log(`Issue #${newIssue.data.number} closed successfully.`);
+                // 3. Post a comment linking the Commit URL
+                const commitUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${commit.id}`;
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: newIssue.data.number,
+                  body: `✅ **Automated Resolution**\n\nThis issue was automatically generated, addressed, and resolved by commit ${commitUrl}`
+                });
+
+                // 4. Instantly Close the Issue
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: newIssue.data.number,
+                  state: 'closed'
+                });
+                
+                console.log(`Issue #${newIssue.data.number} closed successfully.`);
+              } catch (error) {
+                console.log(`⚠️ Failed to process commit "${message}": ${error.message}`);
+              }
             }

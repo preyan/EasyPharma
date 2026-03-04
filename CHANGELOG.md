@@ -21,3 +21,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - chore(git): bypass husky hooks for faster commits on windows
 - feat(scripts): implement automated github issue tracking via gh cli
 - ci(github): add automated professional issue tracking workflow
+- fix(ci): resolve infinite recursion in root test script and fix issue-tracker workflow
