@@ -20,3 +20,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix(workspace): permanently disable unstable nx dynamic node plugins
 - chore(git): bypass husky hooks for faster commits on windows
 - feat(scripts): implement automated github issue tracking via gh cli
+- ci(github): add automated professional issue tracking workflow

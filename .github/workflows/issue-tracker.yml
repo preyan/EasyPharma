@@ -1,0 +1,105 @@
+name: Issue Automation
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  automate-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Parse Commits and Manage Issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Regex parser based on Conventional Commits: type(scope): subject
+            const commitRegex = /^(feat|fix|chore|docs|style|refactor|perf|test)(?:\(([^)]+)\))?: (.+)$/;
+
+            // Iterate over all commits pushed in this event
+            for (const commit of context.payload.commits) {
+              const message = commit.message.split('\n')[0]; // Get the subject line
+              
+              const match = message.match(commitRegex);
+              if (!match) {
+                console.log(`Commit "${message}" does not match conventional commit format. Skipping issue generation.`);
+                continue;
+              }
+
+              const [_, type, scope, subject] = match;
+              console.log(`Parsed -> Type: ${type}, Scope: ${scope}, Subject: ${subject}`);
+
+              // Prevent duplicate issues if commit already Fixes/Refs one
+              if (commit.message.includes('Fixes #') || commit.message.includes('Refs #')) {
+                 console.log(`Commit already references an issue manually. Skipping.`);
+                 continue;
+              }
+
+              // Determine template and labels
+              let templateFile = '';
+              let labels = [];
+
+              if (type === 'feat') {
+                templateFile = '.github/ISSUE_TEMPLATE/feature.md';
+                labels = ['feature', 'enhancement'];
+              } else if (type === 'fix' || type === 'bug') {
+                templateFile = '.github/ISSUE_TEMPLATE/bug_report.md';
+                labels = ['bug'];
+              }
+
+              if (scope) {
+                labels.push(`area:${scope}`);
+              }
+
+              let issueBody = subject;
+              if (templateFile && fs.existsSync(templateFile)) {
+                 // Open the template file and strip the Markdown frontmatter (---...---)
+                 const rawTemplate = fs.readFileSync(templateFile, 'utf8');
+                 const bodyWithoutFrontmatter = rawTemplate.replace(/^---[\s\S]*?---\n/, '');
+                 
+                 // Inject the Commit Hash into the template body
+                 issueBody = bodyWithoutFrontmatter.replace('- **Branch / Commit:**', `- **Commit:** ${commit.id}`);
+              }
+
+              // 1. Create the Issue
+              const issueTitle = `[${type.toUpperCase()}]: ${subject}`;
+              console.log(`Creating issue: ${issueTitle}`);
+              
+              const newIssue = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+                labels: labels,
+                assignees: [commit.author.username || context.actor]
+              });
+
+              console.log(`Issue Create Success -> #${newIssue.data.number}`);
+
+              // 2. Post a comment linking the Commit URL
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: newIssue.data.number,
+                body: `✅ **Automated Resolution**\nThis issue was automatically generated, addressed, and resolved by commit ${commit.url}`
+              });
+
+              // 3. Instantly Close the Issue
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: newIssue.data.number,
+                state: 'closed'
+              });
+              
+              console.log(`Issue #${newIssue.data.number} closed successfully.`);
+            }
