@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+
+## [1.0.12] - 2026-03-04
+
+### Fixed
+- remove unused conflicting 'glob' declaration in coverage badge workflow ([`4ad9909`](https://github.com/preyan/EasyPharma/commit/4ad99092d1096e50036972a546dcc845644a882f))
+
 ## [1.0.11] - 2026-03-04
 
 ### Fixed
