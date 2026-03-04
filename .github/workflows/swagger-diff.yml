@@ -15,7 +15,7 @@ jobs:
       HUSKY: '0'
     steps:
       - name: Checkout PR
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - uses: pnpm/action-setup@v4
         with:
@@ -41,7 +41,7 @@ jobs:
           kill %1 2>/dev/null || true
 
       - name: Checkout Base
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.base.ref }}
           path: base
