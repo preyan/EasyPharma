@@ -23,3 +23,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ci(github): add automated professional issue tracking workflow
 - fix(ci): resolve infinite recursion in root test script and fix issue-tracker workflow
 - chore(workspace): remove obsolete NX environment patches and .npmrc
+- fix(ci): hydrate issue templates and auto-check CI status on issues

@@ -28,39 +28,41 @@ jobs:
             // Iterate over all commits pushed in this event
             for (const commit of context.payload.commits) {
               const message = commit.message.split('\n')[0]; // Get the subject line
-              
+
               const match = message.match(commitRegex);
               if (!match) {
-                console.log(`Commit "${message}" does not match conventional commit format. Skipping issue generation.`);
+                console.log(`Commit "${message}" does not match conventional commit format. Skipping.`);
                 continue;
               }
 
               const [_, type, scope, subject] = match;
-              console.log(`Parsed -> Type: ${type}, Scope: ${scope}, Subject: ${subject}`);
+              console.log(`Parsed -> Type: ${type}, Scope: ${scope || 'none'}, Subject: ${subject}`);
 
-              // Prevent duplicate issues if commit already Fixes/Refs one
+              // Prevent duplicate issues if commit already references one
               if (commit.message.includes('Fixes #') || commit.message.includes('Refs #')) {
-                 console.log(`Commit already references an issue manually. Skipping.`);
-                 continue;
+                console.log(`Commit already references an issue manually. Skipping.`);
+                continue;
               }
 
-              // Determine template and labels
+              // Determine template, labels, and type label
               let templateFile = '';
               let labels = [];
 
               if (type === 'feat') {
                 templateFile = '.github/ISSUE_TEMPLATE/feature.md';
                 labels = ['feature', 'enhancement'];
-              } else if (type === 'fix' || type === 'bug') {
+              } else if (type === 'fix') {
                 templateFile = '.github/ISSUE_TEMPLATE/bug_report.md';
                 labels = ['bug'];
+              } else {
+                labels = [type]; // chore, docs, refactor, etc.
               }
 
               if (scope) {
                 labels.push(`area:${scope}`);
               }
 
-              // Ensure all labels exist before assigning them
+              // Ensure all labels exist
               for (const label of labels) {
                 try {
                   await github.rest.issues.getLabel({ owner: context.repo.owner, repo: context.repo.repo, name: label });
@@ -70,21 +72,78 @@ jobs:
                 }
               }
 
-              let issueBody = subject;
-              if (templateFile && fs.existsSync(templateFile)) {
-                 // Open the template file and strip the Markdown frontmatter (---...---)
-                 const rawTemplate = fs.readFileSync(templateFile, 'utf8');
-                 const bodyWithoutFrontmatter = rawTemplate.replace(/^---[\s\S]*?---\n/, '');
-                 
-                 // Inject the Commit Hash into the template body
-                 issueBody = bodyWithoutFrontmatter.replace('- **Branch / Commit:**', `- **Commit:** ${commit.id}`);
+              // Build the commit URL
+              const commitUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${commit.id}`;
+              const branch = context.ref.replace('refs/heads/', '');
+
+              // Build issue body
+              let issueBody = '';
+
+              if (type === 'feat') {
+                // Hydrate feature template
+                issueBody = [
+                  `### 📖 User Story`,
+                  `As a **developer**, I want to **${subject}**.`,
+                  ``,
+                  `### 🛠️ Technical Tasks`,
+                  `- [x] Implementation committed in [\`${commit.id.substring(0, 7)}\`](${commitUrl})`,
+                  ``,
+                  `### ✅ Definition of Done`,
+                  `- [x] Code committed to \`${branch}\` branch.`,
+                  `- [ ] Swagger API docs updated.`,
+                  `- [ ] Build passes in CI.`,
+                ].join('\n');
+              } else if (type === 'fix') {
+                // Hydrate bug report template
+                issueBody = [
+                  `### 🐛 Description`,
+                  `${subject}`,
+                  ``,
+                  `### 📍 Environment`,
+                  `- **Branch:** \`${branch}\``,
+                  `- **Commit:** [\`${commit.id.substring(0, 7)}\`](${commitUrl})`,
+                  `- **Runner:** GitHub Actions (ubuntu-latest)`,
+                  ``,
+                  `### 🔁 Steps to Reproduce`,
+                  `1. Identified during development on \`${branch}\` branch.`,
+                  ``,
+                  `### ❌ Actual Behaviour`,
+                  `See commit message: *${subject}*`,
+                  ``,
+                  `### ✅ Expected Behaviour`,
+                  `Issue resolved by the referenced commit.`,
+                  ``,
+                  `### 🛠️ Proposed Fix`,
+                  `Fix applied in commit [\`${commit.id.substring(0, 7)}\`](${commitUrl}).`,
+                  ``,
+                  `### ✅ Definition of Done`,
+                  `- [x] Root cause identified and documented.`,
+                  `- [x] Fix committed and referenced to this issue.`,
+                  `- [ ] CI passes on \`main\`.`,
+                ].join('\n');
+              } else {
+                // Generic issue body for chore, docs, refactor, etc.
+                issueBody = [
+                  `### 📋 Summary`,
+                  `**Type:** \`${type}\`${scope ? ` | **Scope:** \`${scope}\`` : ''}`,
+                  ``,
+                  `${subject}`,
+                  ``,
+                  `### 🔗 Reference`,
+                  `- **Branch:** \`${branch}\``,
+                  `- **Commit:** [\`${commit.id.substring(0, 7)}\`](${commitUrl})`,
+                  ``,
+                  `### ✅ Definition of Done`,
+                  `- [x] Change committed to \`${branch}\`.`,
+                  `- [ ] CI passes.`,
+                ].join('\n');
               }
 
               try {
                 // 1. Create the Issue
                 const issueTitle = `[${type.toUpperCase()}]: ${subject}`;
                 console.log(`Creating issue: ${issueTitle}`);
-                
+
                 const newIssue = await github.rest.issues.create({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
@@ -94,28 +153,37 @@ jobs:
                   assignees: [commit.author.username || context.actor]
                 });
 
-                console.log(`Issue Create Success -> #${newIssue.data.number}`);
+                console.log(`Issue #${newIssue.data.number} created.`);
 
-                // 2. Wait for GitHub to index the new issue before commenting
+                // 2. Wait for GitHub to index the issue
                 await new Promise(resolve => setTimeout(resolve, 2000));
 
-                // 3. Post a comment linking the Commit URL
-                const commitUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${commit.id}`;
+                // 3. Post a resolution comment
                 await github.rest.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: newIssue.data.number,
-                  body: `✅ **Automated Resolution**\n\nThis issue was automatically generated, addressed, and resolved by commit ${commitUrl}`
+                  body: [
+                    `✅ **Automated Resolution**`,
+                    ``,
+                    `This issue was automatically generated and resolved by commit ${commitUrl}.`,
+                    ``,
+                    `| Field | Value |`,
+                    `|-------|-------|`,
+                    `| **Commit** | [\`${commit.id.substring(0, 7)}\`](${commitUrl}) |`,
+                    `| **Branch** | \`${branch}\` |`,
+                    `| **Author** | @${commit.author.username || context.actor} |`,
+                  ].join('\n')
                 });
 
-                // 4. Instantly Close the Issue
+                // 4. Close the Issue
                 await github.rest.issues.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: newIssue.data.number,
                   state: 'closed'
                 });
-                
+
                 console.log(`Issue #${newIssue.data.number} closed successfully.`);
               } catch (error) {
                 console.log(`⚠️ Failed to process commit "${message}": ${error.message}`);
