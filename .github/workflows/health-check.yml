@@ -1,0 +1,81 @@
+name: Scheduled Health Check
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: '0'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run Health Checks
+        id: health
+        run: |
+          echo "## 🏥 Daily Health Report" > /tmp/health-report.md
+          echo "" >> /tmp/health-report.md
+          echo "**Date:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> /tmp/health-report.md
+          echo "" >> /tmp/health-report.md
+
+          FAILED=0
+
+          echo "### Lint" >> /tmp/health-report.md
+          if pnpm nx run-many -t lint 2>&1; then
+            echo "✅ All projects pass linting" >> /tmp/health-report.md
+          else
+            echo "❌ Lint failures detected" >> /tmp/health-report.md
+            FAILED=1
+          fi
+
+          echo "" >> /tmp/health-report.md
+          echo "### Tests" >> /tmp/health-report.md
+          if pnpm nx run-many -t test 2>&1; then
+            echo "✅ All tests pass" >> /tmp/health-report.md
+          else
+            echo "❌ Test failures detected" >> /tmp/health-report.md
+            FAILED=1
+          fi
+
+          echo "" >> /tmp/health-report.md
+          echo "### Build" >> /tmp/health-report.md
+          if pnpm nx run-many -t build 2>&1; then
+            echo "✅ All projects build successfully" >> /tmp/health-report.md
+          else
+            echo "❌ Build failures detected" >> /tmp/health-report.md
+            FAILED=1
+          fi
+
+          echo "failed=$FAILED" >> $GITHUB_OUTPUT
+
+      - name: Open Issue on Failure
+        if: steps.health.outputs.failed == '1'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('/tmp/health-report.md', 'utf8');
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 Daily Health Check Failed — ${new Date().toISOString().split('T')[0]}`,
+              body: report,
+              labels: ['bug', 'health-check']
+            });

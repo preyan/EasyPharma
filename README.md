@@ -1,13 +1,43 @@
 # 💊 EasyPharma Workspace
 
+<!-- BADGES:START -->
+
 [![CI](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml/badge.svg)](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml)
 [![Compliance & Docs](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml/badge.svg)](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml)
 [![Nx](https://img.shields.io/badge/Nx-smart--monorepo-blue?logo=nx&logoColor=white)](https://nx.dev)
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 
+<!-- BADGES:END -->
+
 > **A secure, phase-locked, and resilient enterprise API and Client solution natively constructed in an Nx Monorepo.**
 
 EasyPharma represents an absolute standard in architectural fidelity. Every component within is intentionally modular, inherently scalable, and explicitly secured for Enterprise deployment footprints.
+
+---
+
+## 📊 Project Progress
+
+<!-- PROGRESS:START -->
+
+| Phase 1 | Phase 2 | Phase 3 | Phase 4 | Phase 5 | Phase 6 | Phase 7 | Phase 8 |
+| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
+|   ✅    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |
+
+<!-- PROGRESS:END -->
+
+---
+
+## 📈 Repository Stats
+
+<!-- STATS:START -->
+
+| Metric           | Value |
+| ---------------- | ----- |
+| ⭐ Stars         | 0     |
+| 🐛 Open Issues   | -     |
+| 📝 Lines of Code | -     |
+
+<!-- STATS:END -->
 
 ---
 
@@ -42,16 +72,19 @@ _The landing page features a minimalist dark-mode dashboard, fluid gradients, an
 
 ---
 
-## 🛠️ Technology Stack Breakdown
+## 🛠️ Technology Stack
 
-| Layer                  | Technology Set                                          |
-| :--------------------- | :------------------------------------------------------ |
-| **Workspace Platform** | `Nx Monorepo`, `pnpm`                                   |
-| **Backend Core**       | `NestJS 11 LTS`, `Express`, `TypeScript`                |
-| **Database Gateway**   | `Prisma ORM 7`, `Zod Validation`                        |
-| **Frontend Core**      | `Angular 21 LTS`, `NgRx Signal Stores`, `RxJS`          |
-| **Testing Regimen**    | `Vitest`, `Jest`, `Playwright`                          |
-| **CI/CD Triggers**     | `Husky Hooks`, `Conventional Commits`, `GitHub Actions` |
+<!-- DEPS:START -->
+
+| Package         | Version |
+| --------------- | ------- |
+| `@angular/core` | -       |
+| `@nestjs/core`  | -       |
+| `nx`            | -       |
+| `vitest`        | -       |
+| `typescript`    | -       |
+
+<!-- DEPS:END -->
 
 ---
 
@@ -65,39 +98,15 @@ Our application runs entirely based on the following rules:
 
 ---
 
-## 🗺️ The Eight-Phase Implementation Plan
-
-We are executing software creation structurally and surgically.
-
-- ✅ **[PHASE 1] Infrastructure & Workspace (The Skeleton):**
-  - Initialize Nx, Angular, NestJS, Prisma, and quality gates.
-  - Repository cleanup and premium Landing Page implementation. Audit complete.
-- ❌ **[PHASE 2] Security, OIDC & RBAC (The Shield):**
-  - Auth service context execution, JWT strategy implementations, Role guards, and Swagger integrations.
-- ❌ **[PHASE 3] Core Domain (Inventory Flow):**
-  - Database schema pushes, NestJS CRUD interfaces with Zod payload parsings. Signal-driven UI tables.
-- ❌ **[PHASE 4] Guest Demonstrations & SSR:**
-  - Deploy SSR structures out of the box. Hook mock APIs, execute interactive CDK overlay tours globally.
-- ❌ **[PHASE 5] Resilience Validation:**
-  - Automated Health Status APIs (`/health`). Implement Global Exception filters outputting format-ready JSON traces.
-- ❌ **[PHASE 6] Compliance Generation:**
-  - Compile automated codebase Compodoc metrics and finalized Open-API specs for third-party auditing. Target >80% code coverage threshold.
-- ❌ **[PHASE 7] CI/CD Implementations:**
-  - Stage multi-layer Dockerfiles pushing straight through GitHub actions integration triggers.
-- ❌ **[PHASE 8] Scale Strategies:**
-  - Wire-up database scaling triggers, apply Redis query cache pipelines for maximum I/O. Hand-off package maintenance processes.
-
----
-
 ## ⚙️ Quick Start Installation
 
-Ensure you have Node 20+ and pnpm installed natively.
+Ensure you have Node 22+ and pnpm installed natively.
 
 1.  **Clone down the mono-repo stack:**
 
     ```bash
-    git clone https://github.com/your-org/easy-pharma.git
-    cd easy-pharma
+    git clone https://github.com/preyan/EasyPharma.git
+    cd EasyPharma
     pnpm install
     ```
 
@@ -122,6 +131,13 @@ Ensure you have Node 20+ and pnpm installed natively.
     ```bash
     pnpm nx run-many -t lint test build
     ```
+
+---
+
+## 👥 Contributors
+
+<!-- CONTRIBUTORS:START -->
+<!-- CONTRIBUTORS:END -->
 
 ---
 

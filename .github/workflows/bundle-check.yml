@@ -1,0 +1,78 @@
+name: Bundle Size Check
+on:
+  pull_request:
+    branches: [develop, main]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  bundle-check:
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: '0'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build Client
+        run: pnpm nx build client-web --configuration=production
+
+      - name: Check Bundle Size
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            const MAX_SIZE_MB = 5;
+            const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+
+            // Get total size of dist folder
+            const sizeOutput = execSync('du -sb dist/apps/client-web 2>/dev/null || echo "0\t."').toString().trim();
+            const totalBytes = parseInt(sizeOutput.split('\t')[0]);
+            const totalMB = (totalBytes / (1024 * 1024)).toFixed(2);
+
+            // Get individual file sizes
+            const files = execSync('find dist/apps/client-web -type f -name "*.js" -o -name "*.css" | head -20').toString().trim().split('\n').filter(Boolean);
+            let breakdown = '| File | Size |\n|---|---|\n';
+            for (const file of files) {
+              const size = execSync(`wc -c < "${file}"`).toString().trim();
+              const kb = (parseInt(size) / 1024).toFixed(1);
+              const basename = file.split('/').pop();
+              breakdown += `| \`${basename}\` | ${kb} KB |\n`;
+            }
+
+            const status = totalBytes > MAX_SIZE_BYTES ? '❌ OVER LIMIT' : '✅ Within Limit';
+            const comment = `### 📦 Bundle Size Report\n\n**Total:** ${totalMB} MB / ${MAX_SIZE_MB} MB limit ${status}\n\n${breakdown}`;
+
+            // Post or update comment
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number
+            });
+            const existing = comments.data.find(c => c.body.includes('Bundle Size Report'));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                comment_id: existing.id, body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number, body: comment
+              });
+            }
+
+            if (totalBytes > MAX_SIZE_BYTES) {
+              core.setFailed(`Bundle size ${totalMB} MB exceeds ${MAX_SIZE_MB} MB limit!`);
+            }

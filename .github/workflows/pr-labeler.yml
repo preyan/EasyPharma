@@ -1,0 +1,52 @@
+name: PR Size Labeler
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label PR by Size
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const changes = pr.additions + pr.deletions;
+
+            const sizeLabels = [
+              { label: 'size/XS', max: 10 },
+              { label: 'size/S', max: 50 },
+              { label: 'size/M', max: 200 },
+              { label: 'size/L', max: 500 },
+              { label: 'size/XL', max: Infinity }
+            ];
+
+            const size = sizeLabels.find(s => changes <= s.max);
+
+            // Remove old size labels
+            const currentLabels = pr.labels.map(l => l.name).filter(n => n.startsWith('size/'));
+            for (const old of currentLabels) {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: pr.number, name: old
+              }).catch(() => {});
+            }
+
+            // Ensure label exists
+            try {
+              await github.rest.issues.getLabel({ owner: context.repo.owner, repo: context.repo.repo, name: size.label });
+            } catch {
+              const colors = { 'size/XS': '0e8a16', 'size/S': '2cbe4e', 'size/M': 'fbca04', 'size/L': 'ee9513', 'size/XL': 'b60205' };
+              await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, name: size.label, color: colors[size.label] });
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: pr.number, labels: [size.label]
+            });
+
+            console.log(`Labeled PR #${pr.number} as ${size.label} (${changes} changes)`);
