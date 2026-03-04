@@ -1,12 +1,14 @@
 # 💊 EasyPharma Workspace
 
 <!-- BADGES:START -->
-
-[![CI](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml/badge.svg)](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml)
-[![Compliance & Docs](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml/badge.svg)](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml)
-[![Nx](https://img.shields.io/badge/Nx-smart--monorepo-blue?logo=nx&logoColor=white)](https://nx.dev)
-[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
-
+![Version](https://img.shields.io/badge/version-v1.0.8-blue)
+![CI](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci.yml?branch=develop&label=CI)
+![Issues](https://img.shields.io/github/issues/preyan/EasyPharma)
+![License](https://img.shields.io/badge/license-Proprietary-red)
+![Node](https://img.shields.io/badge/node-22_LTS-green)
+![Angular](https://img.shields.io/badge/Angular-21-dd0031)
+![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)
+![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)
 <!-- BADGES:END -->
 
 > **A secure, phase-locked, and resilient enterprise API and Client solution natively constructed in an Nx Monorepo.**
@@ -18,11 +20,9 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 ## 📊 Project Progress
 
 <!-- PROGRESS:START -->
-
 | Phase 1 | Phase 2 | Phase 3 | Phase 4 | Phase 5 | Phase 6 | Phase 7 | Phase 8 |
-| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
-|   ✅    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |
-
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 <!-- PROGRESS:END -->
 
 ---
@@ -30,13 +30,11 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 ## 📈 Repository Stats
 
 <!-- STATS:START -->
-
-| Metric           | Value |
-| ---------------- | ----- |
-| ⭐ Stars         | 0     |
-| 🐛 Open Issues   | -     |
-| 📝 Lines of Code | -     |
-
+| Metric | Value |
+|---|---|
+| ⭐ Stars | 0 |
+| 🐛 Open Issues | 50 |
+| 📝 Lines of Code | 458 |
 <!-- STATS:END -->
 
 ---
@@ -75,14 +73,15 @@ _The landing page features a minimalist dark-mode dashboard, fluid gradients, an
 ## 🛠️ Technology Stack
 
 <!-- DEPS:START -->
-
-| Package         | Version |
-| --------------- | ------- |
-| `@angular/core` | -       |
-| `@nestjs/core`  | -       |
-| `nx`            | -       |
-| `vitest`        | -       |
-| `typescript`    | -       |
+| Package | Version |
+|---|---|
+| `@angular/core` | `~21.1.0` |
+| `@angular/cli` | `~21.1.0` |
+| `@nestjs/core` | `^11.0.0` |
+| `@prisma/client` | `^7.4.2` |
+| `nx` | `22.5.3` |
+| `vitest` | `^4.0.8` |
+| `typescript` | `^5.9.3` |
 
 <!-- DEPS:END -->
 
@@ -137,6 +136,7 @@ Ensure you have Node 22+ and pnpm installed natively.
 ## 👥 Contributors
 
 <!-- CONTRIBUTORS:START -->
+<a href="https://github.com/preyan"><img src="https://avatars.githubusercontent.com/u/30199639?v=4" width="50" title="preyan"/></a>
 <!-- CONTRIBUTORS:END -->
 
 ---
