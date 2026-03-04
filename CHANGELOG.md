@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+
+## [1.0.10] - 2026-03-04
+
+### Changed
+- **[chore]** group dependabot updates to reduce PR noise ([`946d5e0`](https://github.com/preyan/EasyPharma/commit/946d5e0395c4939c0ccb06ece2c7b907116c1588))
+
 ## [1.0.9] - 2026-03-04
 
 ### Changed
