@@ -1,7 +1,7 @@
 # 💊 EasyPharma Workspace
 
 <!-- BADGES:START -->
-![Version](https://img.shields.io/badge/version-v1.0.10-blue)
+![Version](https://img.shields.io/badge/version-v1.0.11-blue)
 ![Issues](https://img.shields.io/github/issues/preyan/EasyPharma)
 ![License](https://img.shields.io/badge/license-Proprietary-red)
 ![Node](https://img.shields.io/badge/node-22_LTS-green)
