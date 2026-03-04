@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [1.1.0] - 2026-03-04
+
+### Added
+- enhance repository stats with closed issues and merged prs ([`2d14355`](https://github.com/preyan/EasyPharma/commit/2d143553f158b7f8be8399b3528cdcc895c3fa83))
+
 ## [1.1.0] - 2026-03-05
 
 ### Phase 1 Milestone: Infrastructure & Workspace
