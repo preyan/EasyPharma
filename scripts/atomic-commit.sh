@@ -23,4 +23,7 @@ echo "- $MESSAGE" >> CHANGELOG.md
 # 3. Commit
 git add .
 git commit --no-verify -m "$(echo -e "$COMMIT_MSG")"
-echo "🚀 Committed & Version Bumped. [Context: CI will handle issue tracking]"
+
+# 4. Push to upstream
+git push
+echo "🚀 Committed, Bumped & Pushed. [Context: CI will handle issue tracking]"
