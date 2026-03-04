@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+## [1.0.9] - 2026-03-04
+
+### Changed
+- **[chore]** reduce emoji usage across repo for professional tone ([`7f6e8dc`](https://github.com/preyan/EasyPharma/commit/7f6e8dcc0dbc98583b13b4bf973e7e539202f71a))
+
 ## [1.0.8] - 2026-03-04
 
 ### Changed
