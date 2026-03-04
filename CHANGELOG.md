@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [1.0.8] - 2026-03-04
+
+### Changed
+- **[ci]** fully automate versioning changelog and issue tracking via github actions ([`a5747e1`](https://github.com/preyan/EasyPharma/commit/a5747e1f59e7aa5942943e9278b82434bc23a502))
+
 ## [1.0.7] - 2026-03-05
 
 ### Fixed
