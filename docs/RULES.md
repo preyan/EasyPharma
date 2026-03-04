@@ -5,6 +5,7 @@ Welcome to the official documentation for the EasyPharma Workspace. This project
 ## 🏛️ Project Architecture
 
 - **[Phase-Locked Roadmap](architecture/roadmap.md)**: Our 8-Phase sequence from skeleton to production scale.
+- **[Automation Suite](architecture/automation.md)**: Details on CI/CD, security, and project management automation.
 
 ## 📐 Standards & Protocols
 
