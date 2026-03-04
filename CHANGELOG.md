@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+
+## [1.1.2] - 2026-03-04
+
+### Changed
+- **[docs]** link CI workflows to GitHub Actions pages ([`be384c4`](https://github.com/preyan/EasyPharma/commit/be384c4b4718a2fdeaf4216f5cffafcf4978bcab))
+
 ## [1.1.1] - 2026-03-04
 
 ### Changed
