@@ -19,3 +19,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - chore(husky): activate nx affected checks on pre-commit
 - fix(workspace): permanently disable unstable nx dynamic node plugins
 - chore(git): bypass husky hooks for faster commits on windows
+- feat(scripts): implement automated github issue tracking via gh cli
