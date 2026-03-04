@@ -18,6 +18,7 @@ fi
 git add .
 git commit --no-verify -m "$(echo -e "$COMMIT_MSG")"
 
-# 2. Push to upstream (GitHub Actions handles versioning, changelog, and issue tracking)
+# 2. Sync with remote and push (GitHub Actions handles versioning, changelog, and issue tracking)
+git pull --rebase origin develop
 git push
-echo "🚀 Committed & Pushed. [CI handles versioning, changelog, and issue tracking]"
+echo "Committed and pushed. [CI handles versioning, changelog, and issue tracking]"
