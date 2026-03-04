@@ -74,27 +74,27 @@ jobs:
               if (type === 'feat') {
                 labels = ['feature', 'enhancement'];
                 issueBody = [
-                  `### 📖 User Story`,
+                  `### User Story`,
                   `As a **developer**, I want to **${subject}**.`,
                   ``,
-                  `### 🛠️ Technical Tasks`,
+                  `### Technical Tasks`,
                   `- [x] Implementation committed in ${commitLink}`,
                   ``,
-                  `### ✅ Definition of Done`,
+                  `### Definition of Done`,
                   `- [x] Code committed to \`${branch}\` branch.`,
                   `- [ ] Build passes in CI.`,
                 ].join('\n');
               } else if (type === 'fix') {
                 labels = ['bug'];
                 issueBody = [
-                  `### 🐛 Description`, `${subject}`, ``,
-                  `### 📍 Environment`,
+                  `### Description`, `${subject}`, ``,
+                  `### Environment`,
                   `- **Branch:** \`${branch}\``,
                   `- **Commit:** ${commitLink}`,
                   `- **Runner:** GitHub Actions (ubuntu-latest)`, ``,
-                  `### 🛠️ Proposed Fix`,
+                  `### Proposed Fix`,
                   `Fix applied in commit ${commitLink}.`, ``,
-                  `### ✅ Definition of Done`,
+                  `### Definition of Done`,
                   `- [x] Root cause identified and documented.`,
                   `- [x] Fix committed and referenced to this issue.`,
                   `- [ ] CI passes on \`main\`.`,
@@ -102,13 +102,13 @@ jobs:
               } else {
                 labels = [type];
                 issueBody = [
-                  `### 📋 Summary`,
+                  `### Summary`,
                   `**Type:** \`${type}\`${scope ? ` | **Scope:** \`${scope}\`` : ''}`, ``,
                   `${subject}`, ``,
-                  `### 🔗 Reference`,
+                  `### Reference`,
                   `- **Branch:** \`${branch}\``,
                   `- **Commit:** ${commitLink}`, ``,
-                  `### ✅ Definition of Done`,
+                  `### Definition of Done`,
                   `- [x] Change committed to \`${branch}\`.`,
                   `- [ ] CI passes.`,
                 ].join('\n');

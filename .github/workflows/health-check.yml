@@ -29,7 +29,7 @@ jobs:
       - name: Run Health Checks
         id: health
         run: |
-          echo "## 🏥 Daily Health Report" > /tmp/health-report.md
+          echo "## Daily Health Report" > /tmp/health-report.md
           echo "" >> /tmp/health-report.md
           echo "**Date:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> /tmp/health-report.md
           echo "" >> /tmp/health-report.md

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-echo "🧪 Running Quality Checks (Lint & Test)..."
+echo "Running Quality Checks (Lint & Test)..."
 
 # Run only against affected projects (not the entire monorepo)
 pnpm nx affected -t lint --base=HEAD~1

@@ -16,7 +16,7 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 
 ---
 
-## 📊 Project Progress
+## Project Progress
 
 <!-- PROGRESS:START -->
 | Phase 1 | Phase 2 | Phase 3 | Phase 4 | Phase 5 | Phase 6 | Phase 7 | Phase 8 |
@@ -26,7 +26,7 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 
 ---
 
-## 🔄 CI Pipeline Status
+## CI Pipeline Status
 
 <!-- ACTIONS:START -->
 
@@ -47,7 +47,7 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 
 ---
 
-## 📈 Repository Stats
+## Repository Stats
 
 <!-- STATS:START -->
 | Metric | Value |
@@ -59,20 +59,20 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-### 🔐 Enterprise-Grade Security
+### Enterprise-Grade Security
 
 - **JWT & OIDC Authentication Contexts:** Centralized authorization via `@nestjs/passport` ensuring protected resource availability strictly based on trust.
 - **Granular RBAC System:** Application-wide Role-Based Access Control enforcing specific domain access (Admin vs. Pharmacist) by declarative `@Roles()` decorators.
 - **Swagger Bearer Authentication:** Built-in Swagger UI bearer token configuration out-of-the-box.
 
-### ⏱️ Instant Front-End Reactivity
+### Instant Front-End Reactivity
 
 - **Zoneless Change Detection:** Next-generation Angular 21 rendering engine without Zone.js overhead (`ExperimentalZonelessChangeDetection` enabled for superior runtime performance).
 - **NgRx Signal Stores:** Deep integration with Angular's reactive Signals primitive coupled with RxJS streams for real-world telemetry reporting.
 
-### 🚀 Production Reliability & UX
+### Production Reliability & UX
 
 - **Interactive Demo Architectures:** Sandboxed UI layer with `@angular/cdk/overlay` guided tours.
 - **SSR & Universal Hydration:** Improved Time-To-Interactive (TTI) indices resulting in maximum SEO footprints.
@@ -80,7 +80,7 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 
 ---
 
-## 🎨 Visual Identity
+## Visual Identity
 
 EasyPharma features a high-end, premium aesthetic built with modern glassmorphism and a deep-space productivity theme.
 
@@ -90,7 +90,7 @@ _The landing page features a minimalist dark-mode dashboard, fluid gradients, an
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 <!-- DEPS:START -->
 | Package | Version |
@@ -107,7 +107,7 @@ _The landing page features a minimalist dark-mode dashboard, fluid gradients, an
 
 ---
 
-## 📐 Strict Coding Protocols
+## Coding Protocols
 
 Our application runs entirely based on the following rules:
 
@@ -117,7 +117,7 @@ Our application runs entirely based on the following rules:
 
 ---
 
-## ⚙️ Quick Start Installation
+## Quick Start
 
 Ensure you have Node 22+ and pnpm installed natively.
 
@@ -153,7 +153,7 @@ Ensure you have Node 22+ and pnpm installed natively.
 
 ---
 
-## 👥 Contributors
+## Contributors
 
 <!-- CONTRIBUTORS:START -->
 <a href="https://github.com/preyan"><img src="https://avatars.githubusercontent.com/u/30199639?v=4" width="50" title="preyan"/></a>
