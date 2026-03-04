@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Mark CI Checkbox on Recent Issues
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             // Find issues created by the Issue Automation workflow in the last hour
