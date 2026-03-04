@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+## [1.1.1] - 2026-03-04
+
+### Changed
+- **[docs]** clean up CI badges and fix pipeline status table ([`155f1ab`](https://github.com/preyan/EasyPharma/commit/155f1abbb5bd4a329970dce2aa84e219feaa8f63))
+
 ## [1.1.0] - 2026-03-04
 
 ### Added

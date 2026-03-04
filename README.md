@@ -1,15 +1,13 @@
 # 💊 EasyPharma Workspace
 
 <!-- BADGES:START -->
-
-![Version](https://img.shields.io/badge/version-v1.1.0-blue)
+![Version](https://img.shields.io/badge/version-v1.1.1-blue)
 ![Issues](https://img.shields.io/github/issues/preyan/EasyPharma)
 ![License](https://img.shields.io/badge/license-Proprietary-red)
 ![Node](https://img.shields.io/badge/node-22_LTS-green)
 ![Angular](https://img.shields.io/badge/Angular-21-dd0031)
 ![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)
 ![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)
-
 <!-- BADGES:END -->
 
 > **A secure, phase-locked, and resilient enterprise API and Client solution natively constructed in an Nx Monorepo.**
@@ -53,15 +51,13 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 ## Repository Stats
 
 <!-- STATS:START -->
-
-| Metric           | Value |
-| ---------------- | ----- |
-| ⭐ Stars         | 0     |
-| 🐛 Open Issues   | 40    |
-| ✅ Closed Issues | 78    |
-| 🔀 Merged PRs    | 0     |
-| 📝 Lines of Code | 458   |
-
+| Metric | Value |
+|---|---|
+| ⭐ Stars | 0 |
+| 🐛 Open Issues | 40 |
+| ✅ Closed Issues | 79 |
+| 🔀 Merged PRs | 0 |
+| 📝 Lines of Code | 458 |
 <!-- STATS:END -->
 
 ---
