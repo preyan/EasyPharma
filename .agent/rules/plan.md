@@ -30,7 +30,7 @@ Goal: A zero-error, library-first Nx Monorepo.
 [PHASE 2] - Security, OIDC & RBAC (The Shield)
 Goal: Enterprise-grade Auth with Roles.
 
-[ ] Task 2.1: Implement NestJS Auth Module with JWT Strategy → https://github.com/preyan/EasyPharma/issues/11.
+[/] Task 2.1: Implement NestJS Auth Module with JWT Strategy → https://github.com/preyan/EasyPharma/issues/11.
 
 [ ] Task 2.2: Create @Roles() decorator and RolesGuard → https://github.com/preyan/EasyPharma/issues/12.
 
