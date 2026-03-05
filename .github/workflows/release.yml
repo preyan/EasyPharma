@@ -1,7 +1,9 @@
 name: Release Automation
+
 on:
   push:
-    branches: [develop, main]
+    branches:
+      - main
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
@@ -9,11 +11,25 @@ on:
 permissions:
   contents: write
   issues: write
+  pull-requests: write # For release-drafter
 
 jobs:
-  release:
+  release-drafter:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        with:
+          config-name: release-drafter.yml
+          disable-autolabeler: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release-automation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
+    needs: release-drafter
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -21,13 +37,7 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GH_PAT }}
 
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: false
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - uses: ./.github/actions/setup
 
       - name: Process Release & Documentation
         uses: actions/github-script@v7
@@ -46,7 +56,7 @@ jobs:
             let hasFeat = false;
             let hasFix = false;
 
-            for (const commit of context.payload.commits) {
+            for (const commit of context.payload.commits || []) {
               const message = commit.message.split('\n')[0];
               const match = message.match(commitRegex);
               if (!match) continue;
@@ -75,7 +85,7 @@ jobs:
                 const newIssue = await github.rest.issues.create({
                   owner: context.repo.owner, repo: context.repo.repo,
                   title: issueTitle, body: `Automated issue for commit ${commitLink}`, labels,
-                  assignees: [commit.author.username || context.actor]
+                  assignees: [commit.author?.username || context.actor]
                 });
                 await github.rest.issues.update({
                   owner: context.repo.owner, repo: context.repo.repo,
@@ -90,6 +100,9 @@ jobs:
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
             const [major, minor, patch] = pkg.version.split('.').map(Number);
             let newVersion = hasFeat ? `${major}.${minor + 1}.0` : `${major}.${minor}.${patch + 1}`;
+            if (!hasFeat && !hasFix && pkg.version === newVersion) {
+              newVersion = `${major}.${minor}.${patch + 1}`; // Default to patch bump if just chores/styles
+            }
             pkg.version = newVersion;
             fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
 
@@ -98,6 +111,9 @@ jobs:
             let entry = `\n## [${newVersion}] - ${date}\n`;
             for (const [cat, items] of Object.entries(changelogEntries)) {
               if (items.length > 0) entry += `\n### ${cat}\n${items.join('\n')}\n`;
+            }
+            if (entry === `\n## [${newVersion}] - ${date}\n`) {
+               entry += `\n### Changed\n- Internal updates and dependency bumps.\n`; 
             }
             let changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
             const insertPoint = changelog.indexOf('\n## [');
@@ -125,7 +141,6 @@ jobs:
               const openIssues = repoData.data.open_issues_count;
               const stars = repoData.data.stargazers_count;
 
-              // Fetch Closed Issues and Merged PRs
               const closedIssues = await github.rest.search.issuesAndPullRequests({ q: `repo:${repo} is:issue is:closed` });
               const mergedPRs = await github.rest.search.issuesAndPullRequests({ q: `repo:${repo} is:pr is:merged` });
 

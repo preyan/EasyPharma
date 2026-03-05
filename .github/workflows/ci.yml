@@ -10,39 +10,184 @@ on:
 permissions:
   actions: read
   contents: read
+  pull-requests: write # Required for bundle-size and swagger-diff commenting
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  HUSKY: '0'
 
 jobs:
-  main:
+  lint:
     runs-on: ubuntu-latest
-    env:
-      HUSKY: '0'
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          filter: tree:0
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - run: pnpm exec nx affected -t lint
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - run: pnpm exec nx affected -t test
+
+  coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - run: pnpm exec nx run-many -t test --coverage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - run: pnpm exec nx affected -t build
+
+  bundle-size:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Build Client
+        run: pnpm nx build client-web --configuration=production
+      - name: Check Bundle Size
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            const MAX_SIZE_MB = 5;
+            const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+
+            const sizeOutput = execSync('du -sb dist/apps/client-web 2>/dev/null || echo "0\t."').toString().trim();
+            const totalBytes = parseInt(sizeOutput.split('\t')[0]);
+            const totalMB = (totalBytes / (1024 * 1024)).toFixed(2);
+
+            const files = execSync('find dist/apps/client-web -type f -name "*.js" -o -name "*.css" | head -20').toString().trim().split('\n').filter(Boolean);
+            let breakdown = '| File | Size |\n|---|---|\n';
+            for (const file of files) {
+              const size = execSync(`wc -c < "${file}"`).toString().trim();
+              const kb = (parseInt(size) / 1024).toFixed(1);
+              const basename = file.split('/').pop();
+              breakdown += `| \`${basename}\` | ${kb} KB |\n`;
+            }
+
+            const status = totalBytes > MAX_SIZE_BYTES ? '❌ OVER LIMIT' : '✅ Within Limit';
+            const comment = `### 📦 Bundle Size Report\n\n**Total:** ${totalMB} MB / ${MAX_SIZE_MB} MB limit ${status}\n\n${breakdown}`;
+
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number
+            });
+            const existing = comments.data.find(c => c.body.includes('Bundle Size Report'));
+
+            if (existing) {
+              await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body: comment });
+            } else {
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.pull_request.number, body: comment });
+            }
+
+            if (totalBytes > MAX_SIZE_BYTES) {
+              core.setFailed(`Bundle size ${totalMB} MB exceeds ${MAX_SIZE_MB} MB limit!`);
+            }
+
+  swagger-diff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Build API (PR branch)
+        run: pnpm nx build api
+        continue-on-error: true
+
+      - name: Generate Swagger Spec (PR)
+        run: |
+          timeout 10 node dist/apps/api/main.js &
+          sleep 5
+          curl -s http://localhost:3000/api-json > /tmp/swagger-pr.json || echo '{}' > /tmp/swagger-pr.json
+          kill %1 2>/dev/null || true
+
+      - name: Checkout Base
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          path: base
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v4
+      - name: Build API (Base)
+        run: |
+          cd base && pnpm install --frozen-lockfile && pnpm nx build api
+        continue-on-error: true
+
+      - name: Generate Swagger Spec (Base)
+        run: |
+          cd base
+          timeout 10 node dist/apps/api/main.js &
+          sleep 5
+          curl -s http://localhost:3000/api-json > /tmp/swagger-base.json || echo '{}' > /tmp/swagger-base.json
+          kill %1 2>/dev/null || true
+
+      - name: Diff Swagger Specs
+        uses: actions/github-script@v7
         with:
-          run_install: false
+          script: |
+            const fs = require('fs');
+            let prSpec = {}, baseSpec = {};
+            try { prSpec = JSON.parse(fs.readFileSync('/tmp/swagger-pr.json', 'utf8')); } catch {}
+            try { baseSpec = JSON.parse(fs.readFileSync('/tmp/swagger-base.json', 'utf8')); } catch {}
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'pnpm'
+            const prPaths = Object.keys(prSpec.paths || {});
+            const basePaths = Object.keys(baseSpec.paths || {});
+            const added = prPaths.filter(p => !basePaths.includes(p));
+            const removed = basePaths.filter(p => !prPaths.includes(p));
 
-      - run: pnpm install --frozen-lockfile
+            if (added.length === 0 && removed.length === 0) {
+              console.log('No API changes detected.');
+              return;
+            }
 
-      # Nx Computation Cache
-      - name: Restore Nx Cache
-        uses: actions/cache@v4
-        with:
-          path: .nx/cache
-          key: nx-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
-          restore-keys: |
-            nx-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
-            nx-${{ runner.os }}-
+            let body = '### 🔄 Swagger API Diff\n\n';
+            if (added.length > 0) body += `**Added Endpoints:**\n${added.map(p => '- `' + p + '`').join('\n')}\n\n`;
+            if (removed.length > 0) body += `**Removed Endpoints:**\n${removed.map(p => '- `' + p + '`').join('\n')}\n\n`;
 
-      - uses: nrwl/nx-set-shas@v4
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number
+            });
+            const existing = comments.data.find(c => c.body.includes('Swagger API Diff'));
 
-      - run: pnpm exec nx affected -t lint test build
+            if (existing) {
+              await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.pull_request.number, body });
+            }
