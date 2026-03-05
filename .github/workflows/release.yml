@@ -132,6 +132,11 @@ jobs:
               `![Angular](https://img.shields.io/badge/Angular-21-dd0031)`,
               `![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)`,
               `![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)`,
+              `![CI](https://img.shields.io/github/actions/workflow/status/${repo}/ci.yml?branch=develop&label=CI)`,
+              `![Security](https://img.shields.io/github/actions/workflow/status/${repo}/security.yml?branch=develop&label=Security)`,
+              `![Release](https://img.shields.io/github/actions/workflow/status/${repo}/release.yml?branch=develop&label=Release)`,
+              `![Docs](https://img.shields.io/github/actions/workflow/status/${repo}/docs.yml?branch=develop&label=Docs)`,
+              `![Maintenance](https://img.shields.io/github/actions/workflow/status/${repo}/repo-maintenance.yml?branch=develop&label=Maintenance)`,
             ].join('\n');
             readme = readme.replace(/<!-- BADGES:START -->[\s\S]*?<!-- BADGES:END -->/, `<!-- BADGES:START -->\n${badges}\n<!-- BADGES:END -->`);
 
