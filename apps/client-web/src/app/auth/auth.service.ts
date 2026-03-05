@@ -1,47 +1,33 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-export interface User {
-    id: string;
-    email: string;
-    name: string;
-    role: string;
-    createdAt: string;
-}
-
-export interface AuthResponse {
-    user: User;
-    accessToken: string;
-    refreshToken: string;
-}
+import { ENDPOINTS, User, AuthResponse, LoginDto, RegisterDto } from '@easy-pharma/shared-core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:3000/api/auth';
 
-    register(data: any): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${this.apiUrl}/register`, data);
+    register(data: RegisterDto): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(ENDPOINTS.AUTH.REGISTER, data);
     }
 
-    login(data: any): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${this.apiUrl}/login`, data);
+    login(credentials: LoginDto): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(ENDPOINTS.AUTH.LOGIN, credentials);
     }
 
     refresh(refreshToken: string): Observable<{ accessToken: string; refreshToken: string }> {
         return this.http.post<{ accessToken: string; refreshToken: string }>(
-            `${this.apiUrl}/refresh`,
+            ENDPOINTS.AUTH.REFRESH,
             {},
             { headers: { Authorization: `Bearer ${refreshToken}` } }
         );
     }
 
     logout(): Observable<void> {
-        return this.http.post<void>(`${this.apiUrl}/logout`, {});
+        return this.http.post<void>(ENDPOINTS.AUTH.LOGOUT, {});
     }
 
     me(): Observable<User> {
-        return this.http.get<User>(`${this.apiUrl}/me`);
+        return this.http.get<User>(ENDPOINTS.AUTH.ME);
     }
 }

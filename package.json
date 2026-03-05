@@ -82,6 +82,7 @@
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.0",
     "@nestjs/swagger": "^11.2.6",
+    "@ngrx/operators": "21.0.1",
     "@ngrx/signals": "^21.0.1",
     "@prisma/client": "^7.4.2",
     "axios": "^1.6.0",

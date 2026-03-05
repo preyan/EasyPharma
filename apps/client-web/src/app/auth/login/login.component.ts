@@ -5,10 +5,10 @@ import { RouterLink } from '@angular/router';
 import { AuthStore } from '../auth.store';
 
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, RouterLink],
-    template: `
+  selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  template: `
     <div class="min-h-screen flex items-center justify-center bg-[#0a0f1d] p-4 font-['Outfit'] overflow-hidden relative">
       <!-- Background Blobs -->
       <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
@@ -24,8 +24,9 @@ import { AuthStore } from '../auth.store';
 
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
             <div class="space-y-2">
-              <label class="text-sm font-medium text-gray-300 ml-1">Email Address</label>
+              <label for="email" class="text-sm font-medium text-gray-300 ml-1">Email Address</label>
               <input 
+                id="email"
                 type="email" 
                 formControlName="email"
                 class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
@@ -37,8 +38,9 @@ import { AuthStore } from '../auth.store';
             </div>
 
             <div class="space-y-2">
-              <label class="text-sm font-medium text-gray-300 ml-1">Password</label>
+              <label for="password" class="text-sm font-medium text-gray-300 ml-1">Password</label>
               <input 
+                id="password"
                 type="password" 
                 formControlName="password"
                 class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
@@ -73,7 +75,7 @@ import { AuthStore } from '../auth.store';
       </div>
     </div>
   `,
-    styles: [`
+  styles: [`
     @keyframes blob {
       0% { transform: translate(0px, 0px) scale(1); }
       33% { transform: translate(30px, -50px) scale(1.1); }
@@ -92,17 +94,17 @@ import { AuthStore } from '../auth.store';
   `]
 })
 export class LoginComponent {
-    private fb = inject(FormBuilder);
-    public authStore = inject(AuthStore);
+  private fb = inject(FormBuilder);
+  public authStore = inject(AuthStore);
 
-    loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]]
-    });
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]]
+  });
 
-    onSubmit() {
-        if (this.loginForm.valid) {
-            this.authStore.login(this.loginForm.value);
-        }
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.authStore.login(this.loginForm.value);
     }
+  }
 }
