@@ -1,7 +1,7 @@
 # 💊 EasyPharma Workspace
 
 <!-- BADGES:START -->
-![Version](https://img.shields.io/badge/version-v1.1.2-blue)
+![Version](https://img.shields.io/badge/version-v1.1.3-blue)
 ![Issues](https://img.shields.io/github/issues/preyan/EasyPharma)
 ![License](https://img.shields.io/badge/license-Proprietary-red)
 ![Node](https://img.shields.io/badge/node-22_LTS-green)
@@ -54,9 +54,9 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 | Metric | Value |
 |---|---|
 | ⭐ Stars | 0 |
-| 🐛 Open Issues | 40 |
-| ✅ Closed Issues | 80 |
-| 🔀 Merged PRs | 0 |
+| 🐛 Open Issues | 38 |
+| ✅ Closed Issues | 101 |
+| 🔀 Merged PRs | 4 |
 | 📝 Lines of Code | 458 |
 <!-- STATS:END -->
 
