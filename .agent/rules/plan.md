@@ -8,7 +8,7 @@ The Agent must adhere to these rules for every single sub-task:
 
 ## 🛠 Operational Protocol (Strict Enforcement)
 
-1. **Atomic Commits**: Commit to `develop` after every sub-task. `main` is locked.
+1. **Atomic Commits**: Commit directly to the **develop** branch after every sub-task. The **main** branch is locked and requires a PR for merging.
 2. **Script Location**: Any automation script created during setup must be placed in `/scripts`.
 3. **Context Reporting**: Output context window size after every terminal execution.
 4. **Version & Changelog**: Increment version and update `CHANGELOG.md` (Keep a Changelog) per commit.
@@ -25,12 +25,12 @@ Goal: A zero-error, library-first Nx Monorepo.
 [x] Task 1.6: Setup NestJS Swagger CLI Plugin in nest-cli.json → https://github.com/preyan/EasyPharma/issues/9.
 [x] Task 1.7: Cleanup boilerplate and implement premium Landing Page → https://github.com/preyan/EasyPharma/issues/45.
 
-[ ] PHASE 1 AUDIT: Verify nx graph, pnpm build, and linting. STOP HERE.
+[X] PHASE 1 AUDIT: Verify nx graph, pnpm build, and linting. STOP HERE.
 
 [PHASE 2] - Security, OIDC & RBAC (The Shield)
 Goal: Enterprise-grade Auth with Roles.
 
-[ ] Task 2.1: Implement NestJS Auth Module with JWT Strategy → https://github.com/preyan/EasyPharma/issues/11.
+[/] Task 2.1: Implement NestJS Auth Module with JWT Strategy → https://github.com/preyan/EasyPharma/issues/11.
 
 [ ] Task 2.2: Create @Roles() decorator and RolesGuard → https://github.com/preyan/EasyPharma/issues/12.
 

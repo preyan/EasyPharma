@@ -13,23 +13,10 @@ permissions:
   issues: write
   pull-requests: write # For release-drafter
 
-jobs:
-  release-drafter:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: release-drafter/release-drafter@v6
-        with:
-          config-name: release-drafter.yml
-          disable-autolabeler: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   release-automation:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
-    needs: release-drafter
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -119,6 +106,7 @@ jobs:
             const insertPoint = changelog.indexOf('\n## [');
             changelog = insertPoint !== -1 ? changelog.slice(0, insertPoint) + '\n' + entry + changelog.slice(insertPoint) : changelog + '\n' + entry;
             fs.writeFileSync('CHANGELOG.md', changelog);
+            fs.writeFileSync('RELEASE_NOTES.md', entry.trim());
 
             // --- 4. Dynamic README ---
             let readme = fs.readFileSync('README.md', 'utf8');
@@ -132,6 +120,11 @@ jobs:
               `![Angular](https://img.shields.io/badge/Angular-21-dd0031)`,
               `![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)`,
               `![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)`,
+              `![CI](https://img.shields.io/github/actions/workflow/status/${repo}/ci.yml?branch=develop&label=CI)`,
+              `![Security](https://img.shields.io/github/actions/workflow/status/${repo}/security.yml?branch=develop&label=Security)`,
+              `![Release](https://img.shields.io/github/actions/workflow/status/${repo}/release.yml?branch=develop&label=Release)`,
+              `![Docs](https://img.shields.io/github/actions/workflow/status/${repo}/docs.yml?branch=develop&label=Docs)`,
+              `![Maintenance](https://img.shields.io/github/actions/workflow/status/${repo}/repo-maintenance.yml?branch=develop&label=Maintenance)`,
             ].join('\n');
             readme = readme.replace(/<!-- BADGES:START -->[\s\S]*?<!-- BADGES:END -->/, `<!-- BADGES:START -->\n${badges}\n<!-- BADGES:END -->`);
 
@@ -162,10 +155,15 @@ jobs:
 
             fs.writeFileSync('README.md', readme);
 
-      - name: Commit & Push
+      - name: Commit, Tag & Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          export VERSION=$(node -p "require('./package.json').version")
           git add package.json CHANGELOG.md README.md
-          git diff --staged --quiet || git commit -m "chore(release): v$(node -p "require('./package.json').version")"
-          git push
+          git diff --staged --quiet || git commit -m "chore(release): v$VERSION"
+          git tag "v$VERSION"
+          git push origin main --tags
+          gh release create "v$VERSION" --title "v$VERSION" --notes-file RELEASE_NOTES.md || echo "Release v$VERSION already exists."

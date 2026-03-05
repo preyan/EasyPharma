@@ -77,11 +77,11 @@ jobs:
             const body = context.payload.pull_request.body || '';
             const errors = [];
 
-            if (!body.includes('## 📋 Description') || body.includes('<!-- Briefly describe')) {
+            if (!body.match(/^##\s*(?:[^\w\s]*\s*)?Description/mi) || body.includes('<!-- Briefly describe')) {
               errors.push('❌ **Description** section must be filled in.');
             }
 
-            if (!body.match(/(?:Fixes|Refs|Closes)\s+#\d+/i) && !body.includes('## 🔗 Related Issue')) {
+            if (!body.match(/(?:Fixes|Refs|Closes)\s+#\d+/i) && !body.match(/^##\s*(?:[^\w\s]*\s*)?Related Issue/mi)) {
               errors.push('⚠️ Consider linking a related issue (e.g., `Fixes #XX`).');
             }
 
