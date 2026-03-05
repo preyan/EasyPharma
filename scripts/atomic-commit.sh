@@ -18,7 +18,12 @@ fi
 git add .
 git commit --no-verify -m "$(echo -e "$COMMIT_MSG")"
 
-# 2. Sync with remote and push (GitHub Actions handles versioning, changelog, and issue tracking)
-git pull --rebase origin develop
-git push
-echo "Committed and pushed. [CI handles versioning, changelog, and issue tracking]"
+# 2. Sync and push feature branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ "$CURRENT_BRANCH" == "develop" ] || [ "$CURRENT_BRANCH" == "main" ]; then
+  echo "❌ ERROR: Direct commits to $CURRENT_BRANCH are forbidden. Please use a feature branch."
+  exit 1
+fi
+
+git push -u origin "$CURRENT_BRANCH"
+echo "Committed and pushed to feature branch $CURRENT_BRANCH."
