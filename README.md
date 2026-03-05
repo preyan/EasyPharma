@@ -91,6 +91,8 @@ EasyPharma features a high-end, premium aesthetic built with modern glassmorphis
 
 _The landing page features a minimalist dark-mode dashboard, fluid gradients, and a responsive glassmorphism UI._
 
+👉 **Read the full [UI Design Guide](docs/ui-design-guide.md) to learn more about our design primitives, colors, and components.**
+
 ---
 
 ## Technology Stack
