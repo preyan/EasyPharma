@@ -1,0 +1,23 @@
+name: Auto Merge Feature PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - develop
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Enable Auto-Merge
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          # Using GH_PAT so the resulting merge commit triggers other workflows (like CI) on develop
+          GITHUB_TOKEN: ${{secrets.GH_PAT}}

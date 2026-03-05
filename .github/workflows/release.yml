@@ -106,6 +106,7 @@ permissions:
             const insertPoint = changelog.indexOf('\n## [');
             changelog = insertPoint !== -1 ? changelog.slice(0, insertPoint) + '\n' + entry + changelog.slice(insertPoint) : changelog + '\n' + entry;
             fs.writeFileSync('CHANGELOG.md', changelog);
+            fs.writeFileSync('RELEASE_NOTES.md', entry.trim());
 
             // --- 4. Dynamic README ---
             let readme = fs.readFileSync('README.md', 'utf8');
@@ -165,4 +166,4 @@ permissions:
           git diff --staged --quiet || git commit -m "chore(release): v$VERSION"
           git tag "v$VERSION"
           git push origin main --tags
-          gh release create "v$VERSION" --title "v$VERSION" --notes "Automatic release for v$VERSION. See CHANGELOG.md for full details." || echo "Release v$VERSION already exists."
+          gh release create "v$VERSION" --title "v$VERSION" --notes-file RELEASE_NOTES.md || echo "Release v$VERSION already exists."
