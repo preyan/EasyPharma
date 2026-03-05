@@ -1,0 +1,171 @@
+name: Release Automation
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write # For release-drafter
+
+jobs:
+  release-drafter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        with:
+          config-name: release-drafter.yml
+          disable-autolabeler: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release-automation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
+    needs: release-drafter
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+
+      - uses: ./.github/actions/setup
+
+      - name: Process Release & Documentation
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { execSync } = require('child_process');
+
+            const commitRegex = /^(feat|fix|chore|docs|style|refactor|perf|test|ci|build)(?:\(([^)]+)\))?: (.+)$/;
+            const repoUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}`;
+            const branch = context.ref.replace('refs/heads/', '');
+            const repo = `${context.repo.owner}/${context.repo.repo}`;
+
+            // --- 1. Issue Tracking ---
+            const changelogEntries = { Added: [], Fixed: [], Changed: [] };
+            let hasFeat = false;
+            let hasFix = false;
+
+            for (const commit of context.payload.commits || []) {
+              const message = commit.message.split('\n')[0];
+              const match = message.match(commitRegex);
+              if (!match) continue;
+
+              const [_, type, scope, subject] = match;
+              const shortSha = commit.id.substring(0, 7);
+              const commitLink = `[\`${shortSha}\`](${repoUrl}/commit/${commit.id})`;
+
+              if (type === 'feat') {
+                changelogEntries.Added.push(`- ${subject} (${commitLink})`);
+                hasFeat = true;
+              } else if (type === 'fix') {
+                changelogEntries.Fixed.push(`- ${subject} (${commitLink})`);
+                hasFix = true;
+              } else {
+                changelogEntries.Changed.push(`- **[${type}]** ${subject} (${commitLink})`);
+              }
+
+              if (commit.message.includes('Fixes #') || commit.message.includes('Refs #')) continue;
+
+              let labels = [type];
+              if (scope) labels.push(`area:${scope}`);
+              
+              try {
+                const issueTitle = `[${type.toUpperCase()}]: ${subject}`;
+                const newIssue = await github.rest.issues.create({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  title: issueTitle, body: `Automated issue for commit ${commitLink}`, labels,
+                  assignees: [commit.author?.username || context.actor]
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: newIssue.data.number, state: 'closed'
+                });
+              } catch (e) {
+                console.log(`Issue creation failed for: ${subject}`);
+              }
+            }
+
+            // --- 2. Version Bump ---
+            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const [major, minor, patch] = pkg.version.split('.').map(Number);
+            let newVersion = hasFeat ? `${major}.${minor + 1}.0` : `${major}.${minor}.${patch + 1}`;
+            if (!hasFeat && !hasFix && pkg.version === newVersion) {
+              newVersion = `${major}.${minor}.${patch + 1}`; // Default to patch bump if just chores/styles
+            }
+            pkg.version = newVersion;
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+
+            // --- 3. Changelog ---
+            const date = new Date().toISOString().split('T')[0];
+            let entry = `\n## [${newVersion}] - ${date}\n`;
+            for (const [cat, items] of Object.entries(changelogEntries)) {
+              if (items.length > 0) entry += `\n### ${cat}\n${items.join('\n')}\n`;
+            }
+            if (entry === `\n## [${newVersion}] - ${date}\n`) {
+               entry += `\n### Changed\n- Internal updates and dependency bumps.\n`; 
+            }
+            let changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
+            const insertPoint = changelog.indexOf('\n## [');
+            changelog = insertPoint !== -1 ? changelog.slice(0, insertPoint) + '\n' + entry + changelog.slice(insertPoint) : changelog + '\n' + entry;
+            fs.writeFileSync('CHANGELOG.md', changelog);
+
+            // --- 4. Dynamic README ---
+            let readme = fs.readFileSync('README.md', 'utf8');
+
+            // Badges
+            const badges = [
+              `![Version](https://img.shields.io/badge/version-v${newVersion}-blue)`,
+              `![Issues](https://img.shields.io/github/issues/${repo})`,
+              `![License](https://img.shields.io/badge/license-Proprietary-red)`,
+              `![Node](https://img.shields.io/badge/node-22_LTS-green)`,
+              `![Angular](https://img.shields.io/badge/Angular-21-dd0031)`,
+              `![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)`,
+              `![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)`,
+            ].join('\n');
+            readme = readme.replace(/<!-- BADGES:START -->[\s\S]*?<!-- BADGES:END -->/, `<!-- BADGES:START -->\n${badges}\n<!-- BADGES:END -->`);
+
+            // Stats
+            try {
+              const repoData = await github.rest.repos.get({ owner: context.repo.owner, repo: context.repo.repo });
+              const openIssues = repoData.data.open_issues_count;
+              const stars = repoData.data.stargazers_count;
+
+              const closedIssues = await github.rest.search.issuesAndPullRequests({ q: `repo:${repo} is:issue is:closed` });
+              const mergedPRs = await github.rest.search.issuesAndPullRequests({ q: `repo:${repo} is:pr is:merged` });
+
+              const loc = execSync("find apps libs -name '*.ts' -not -path '*/node_modules/*' 2>/dev/null | xargs wc -l 2>/dev/null | tail -1 || echo '0 total'").toString().trim().split(' ')[0];
+              const statsTable = [
+                '| Metric | Value |',
+                '|---|---|',
+                `| ⭐ Stars | ${stars} |`,
+                `| 🐛 Open Issues | ${openIssues} |`,
+                `| ✅ Closed Issues | ${closedIssues.data.total_count} |`,
+                `| 🔀 Merged PRs | ${mergedPRs.data.total_count} |`,
+                `| 📝 Lines of Code | ${Number(loc).toLocaleString()} |`
+              ].join('\n');
+
+              readme = readme.replace(/<!-- STATS:START -->[\s\S]*?<!-- STATS:END -->/, `<!-- STATS:START -->\n${statsTable}\n<!-- STATS:END -->`);
+            } catch (e) {
+              console.log(`Stats update failed: ${e.message}`);
+            }
+
+            fs.writeFileSync('README.md', readme);
+
+      - name: Commit & Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json CHANGELOG.md README.md
+          git diff --staged --quiet || git commit -m "chore(release): v$(node -p "require('./package.json').version")"
+          git push

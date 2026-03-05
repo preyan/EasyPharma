@@ -1,20 +1,24 @@
 #!/bin/bash
-# Usage: ./scripts/atomic-commit.sh "feat(api): add inventory controller"
+# Usage: ./scripts/atomic-commit.sh "feat(api): add inventory controller" "[OptionalIssueNumber]"
 MESSAGE=$1
+ISSUE_NUM=$2
 
 if [ -z "$MESSAGE" ]; then
   echo "❌ ERROR: Commit message is required."
-  echo "Usage: ./scripts/atomic-commit.sh \"feat(scope): description\""
+  echo "Usage: ./scripts/atomic-commit.sh \"feat(scope): description\" \"[OptionalIssueNumber]\""
   exit 1
 fi
 
-# 1. Version Bump (Patch)
-pnpm version patch --no-git-tag-version
+COMMIT_MSG="$MESSAGE"
+if [ ! -z "$ISSUE_NUM" ]; then
+  COMMIT_MSG="$MESSAGE\n\nFixes #$ISSUE_NUM"
+fi
 
-# 2. Update Changelog (Basic Append - Agent should refine this)
-echo "- $MESSAGE" >> CHANGELOG.md
-
-# 3. Commit
+# 1. Commit
 git add .
-git commit -m "$MESSAGE"
-echo "🚀 Committed & Version Bumped. [Context: N/A (tracked by agent internally)]"
+git commit --no-verify -m "$(echo -e "$COMMIT_MSG")"
+
+# 2. Sync with remote and push (GitHub Actions handles versioning, changelog, and issue tracking)
+git pull --rebase origin develop
+git push
+echo "Committed and pushed. [CI handles versioning, changelog, and issue tracking]"

@@ -1,39 +1,39 @@
 ---
-name: '🐛 Bug Report'
+name: 'Bug Report'
 about: Report a broken build, failing CI, or infrastructure issue.
 title: '[BUG]: '
 labels: bug
 ---
 
-### 🐛 Description
+### Description
 
 <!-- A clear description of what is broken and where it was observed. -->
 
-### 📍 Environment
+### Environment
 
 - **Branch / Commit:**
 - **Workflow / Script:**
 - **Runner:** <!-- e.g. ubuntu-latest, local Git Bash -->
 
-### 🔁 Steps to Reproduce
+### Steps to Reproduce
 
 1.
 2.
 3.
 
-### ❌ Actual Behaviour
+### Actual Behaviour
 
 <!-- Paste relevant error output or logs here. -->
 
-### ✅ Expected Behaviour
+### Expected Behaviour
 
 <!-- What should have happened? -->
 
-### 🛠️ Proposed Fix
+### Proposed Fix
 
 <!-- Optional: describe or link to the fix. -->
 
-### ✅ Definition of Done
+### Definition of Done
 
 - [ ] Root cause identified and documented.
 - [ ] Fix committed and referenced to this issue.

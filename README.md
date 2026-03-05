@@ -1,9 +1,14 @@
 # 💊 EasyPharma Workspace
 
-[![CI](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml/badge.svg)](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml)
-[![Compliance & Docs](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml/badge.svg)](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml)
-[![Nx](https://img.shields.io/badge/Nx-smart--monorepo-blue?logo=nx&logoColor=white)](https://nx.dev)
-[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+<!-- BADGES:START -->
+![Version](https://img.shields.io/badge/version-v1.1.2-blue)
+![Issues](https://img.shields.io/github/issues/preyan/EasyPharma)
+![License](https://img.shields.io/badge/license-Proprietary-red)
+![Node](https://img.shields.io/badge/node-22_LTS-green)
+![Angular](https://img.shields.io/badge/Angular-21-dd0031)
+![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)
+![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)
+<!-- BADGES:END -->
 
 > **A secure, phase-locked, and resilient enterprise API and Client solution natively constructed in an Nx Monorepo.**
 
@@ -11,20 +16,66 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 
 ---
 
-## 🌟 Key Features
+## Project Progress
 
-### 🔐 Enterprise-Grade Security
+<!-- PROGRESS:START -->
+
+| Phase 1 | Phase 2 | Phase 3 | Phase 4 | Phase 5 | Phase 6 | Phase 7 | Phase 8 |
+| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
+|   ✅    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |   ⬜    |
+
+<!-- PROGRESS:END -->
+
+---
+
+## CI Pipeline Status
+
+<!-- ACTIONS:START -->
+
+| Workflow                                                                                                | Status                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Release Automation**](https://github.com/preyan/EasyPharma/actions/workflows/release-automation.yml) | ![Release](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/release-automation.yml?branch=develop&label=status)  |
+| [**CI**](https://github.com/preyan/EasyPharma/actions/workflows/ci.yml)                                 | ![CI](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci.yml?branch=develop&label=status)                       |
+| [**Compliance & Docs**](https://github.com/preyan/EasyPharma/actions/workflows/ci-docs.yml)             | ![Compliance](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci-docs.yml?branch=develop&label=status)          |
+| [**CodeQL**](https://github.com/preyan/EasyPharma/actions/workflows/codeql.yml)                         | ![CodeQL](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/codeql.yml?branch=develop&label=status)               |
+| [**Secret Scanning**](https://github.com/preyan/EasyPharma/actions/workflows/secret-scanning.yml)       | ![Secret Scan](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/secret-scanning.yml?branch=develop&label=status) |
+| [**Coverage**](https://github.com/preyan/EasyPharma/actions/workflows/coverage.yml)                     | ![Coverage](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/coverage.yml?branch=develop&label=status)           |
+| [**Broken Links**](https://github.com/preyan/EasyPharma/actions/workflows/broken-links.yml)             | ![Links](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/broken-links.yml?branch=develop&label=status)          |
+| [**Health Check**](https://github.com/preyan/EasyPharma/actions/workflows/health-check.yml)             | ![Health](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/health-check.yml?branch=develop&label=status)         |
+| [**Stale Closer**](https://github.com/preyan/EasyPharma/actions/workflows/stale.yml)                    | ![Stale](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/stale.yml?branch=develop&label=status)                 |
+
+<!-- ACTIONS:END -->
+
+---
+
+## Repository Stats
+
+<!-- STATS:START -->
+| Metric | Value |
+|---|---|
+| ⭐ Stars | 0 |
+| 🐛 Open Issues | 40 |
+| ✅ Closed Issues | 80 |
+| 🔀 Merged PRs | 0 |
+| 📝 Lines of Code | 458 |
+<!-- STATS:END -->
+
+---
+
+## Key Features
+
+### Enterprise-Grade Security
 
 - **JWT & OIDC Authentication Contexts:** Centralized authorization via `@nestjs/passport` ensuring protected resource availability strictly based on trust.
 - **Granular RBAC System:** Application-wide Role-Based Access Control enforcing specific domain access (Admin vs. Pharmacist) by declarative `@Roles()` decorators.
 - **Swagger Bearer Authentication:** Built-in Swagger UI bearer token configuration out-of-the-box.
 
-### ⏱️ Instant Front-End Reactivity
+### Instant Front-End Reactivity
 
 - **Zoneless Change Detection:** Next-generation Angular 21 rendering engine without Zone.js overhead (`ExperimentalZonelessChangeDetection` enabled for superior runtime performance).
 - **NgRx Signal Stores:** Deep integration with Angular's reactive Signals primitive coupled with RxJS streams for real-world telemetry reporting.
 
-### 🚀 Production Reliability & UX
+### Production Reliability & UX
 
 - **Interactive Demo Architectures:** Sandboxed UI layer with `@angular/cdk/overlay` guided tours.
 - **SSR & Universal Hydration:** Improved Time-To-Interactive (TTI) indices resulting in maximum SEO footprints.
@@ -32,7 +83,7 @@ EasyPharma represents an absolute standard in architectural fidelity. Every comp
 
 ---
 
-## 🎨 Visual Identity
+## Visual Identity
 
 EasyPharma features a high-end, premium aesthetic built with modern glassmorphism and a deep-space productivity theme.
 
@@ -42,20 +93,25 @@ _The landing page features a minimalist dark-mode dashboard, fluid gradients, an
 
 ---
 
-## 🛠️ Technology Stack Breakdown
+## Technology Stack
 
-| Layer                  | Technology Set                                          |
-| :--------------------- | :------------------------------------------------------ |
-| **Workspace Platform** | `Nx Monorepo`, `pnpm`                                   |
-| **Backend Core**       | `NestJS 11 LTS`, `Express`, `TypeScript`                |
-| **Database Gateway**   | `Prisma ORM 7`, `Zod Validation`                        |
-| **Frontend Core**      | `Angular 21 LTS`, `NgRx Signal Stores`, `RxJS`          |
-| **Testing Regimen**    | `Vitest`, `Jest`, `Playwright`                          |
-| **CI/CD Triggers**     | `Husky Hooks`, `Conventional Commits`, `GitHub Actions` |
+<!-- DEPS:START -->
+
+| Package          | Version   |
+| ---------------- | --------- |
+| `@angular/core`  | `~21.1.0` |
+| `@angular/cli`   | `~21.1.0` |
+| `@nestjs/core`   | `^11.0.0` |
+| `@prisma/client` | `^7.4.2`  |
+| `nx`             | `22.5.3`  |
+| `vitest`         | `^4.0.8`  |
+| `typescript`     | `^5.9.3`  |
+
+<!-- DEPS:END -->
 
 ---
 
-## 📐 Strict Coding Protocols
+## Coding Protocols
 
 Our application runs entirely based on the following rules:
 
@@ -65,39 +121,15 @@ Our application runs entirely based on the following rules:
 
 ---
 
-## 🗺️ The Eight-Phase Implementation Plan
+## Quick Start
 
-We are executing software creation structurally and surgically.
-
-- ✅ **[PHASE 1] Infrastructure & Workspace (The Skeleton):**
-  - Initialize Nx, Angular, NestJS, Prisma, and quality gates.
-  - Repository cleanup and premium Landing Page implementation. Audit complete.
-- ❌ **[PHASE 2] Security, OIDC & RBAC (The Shield):**
-  - Auth service context execution, JWT strategy implementations, Role guards, and Swagger integrations.
-- ❌ **[PHASE 3] Core Domain (Inventory Flow):**
-  - Database schema pushes, NestJS CRUD interfaces with Zod payload parsings. Signal-driven UI tables.
-- ❌ **[PHASE 4] Guest Demonstrations & SSR:**
-  - Deploy SSR structures out of the box. Hook mock APIs, execute interactive CDK overlay tours globally.
-- ❌ **[PHASE 5] Resilience Validation:**
-  - Automated Health Status APIs (`/health`). Implement Global Exception filters outputting format-ready JSON traces.
-- ❌ **[PHASE 6] Compliance Generation:**
-  - Compile automated codebase Compodoc metrics and finalized Open-API specs for third-party auditing. Target >80% code coverage threshold.
-- ❌ **[PHASE 7] CI/CD Implementations:**
-  - Stage multi-layer Dockerfiles pushing straight through GitHub actions integration triggers.
-- ❌ **[PHASE 8] Scale Strategies:**
-  - Wire-up database scaling triggers, apply Redis query cache pipelines for maximum I/O. Hand-off package maintenance processes.
-
----
-
-## ⚙️ Quick Start Installation
-
-Ensure you have Node 20+ and pnpm installed natively.
+Ensure you have Node 22+ and pnpm installed natively.
 
 1.  **Clone down the mono-repo stack:**
 
     ```bash
-    git clone https://github.com/your-org/easy-pharma.git
-    cd easy-pharma
+    git clone https://github.com/preyan/EasyPharma.git
+    cd EasyPharma
     pnpm install
     ```
 
@@ -122,6 +154,16 @@ Ensure you have Node 20+ and pnpm installed natively.
     ```bash
     pnpm nx run-many -t lint test build
     ```
+
+---
+
+## Contributors
+
+<!-- CONTRIBUTORS:START -->
+
+<a href="https://github.com/preyan"><img src="https://avatars.githubusercontent.com/u/30199639?v=4" width="50" title="preyan"/></a>
+
+<!-- CONTRIBUTORS:END -->
 
 ---
 

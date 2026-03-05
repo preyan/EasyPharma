@@ -1,0 +1,14 @@
+# Default owner for everything
+* @preyan
+
+# Frontend
+/apps/client-web/ @preyan
+/libs/ @preyan
+
+# Backend
+/apps/api/ @preyan
+
+# Infrastructure
+/.github/ @preyan
+/scripts/ @preyan
+/prisma/ @preyan

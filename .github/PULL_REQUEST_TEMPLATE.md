@@ -1,24 +1,28 @@
-# 💊 EasyPharma Pull Request
+## Description
 
-## 🏁 Phase Verification
+<!-- Briefly describe what this PR does -->
 
-- [ ] **Phase Audit**: Does this complete or contribute to a specific task in `plan.md`? (Reference: #TaskX.X)
-- [ ] **Locking**: If this fills a Phase, is the Phase Audit line updated/checked?
+## Related Issue
 
-## ✅ Quality Gates
+<!-- Link the relevant issue: Fixes #XX or Refs #XX -->
 
-- [ ] **Nx Integrity**: `nx lint` and `nx build` pass without warnings.
-- [ ] **Security**: No `any` types or `@ts-ignore` used to bypass safety.
-- [ ] **Reliability**: Vitest/Playwright tests added/passing for new logic.
-- [ ] **Coverage**: Minimum 80% coverage maintained.
-- [ ] **Docs**: Relevant ADR or technical guide updated in `/docs`.
+## Type of Change
 
-## 📝 Description
+- [ ] Bug fix (non-breaking change that fixes an issue)
+- [ ] New feature (non-breaking change that adds functionality)
+- [ ] Breaking change (fix or feature causing existing functionality to change)
+- [ ] Documentation update
+- [ ] Refactor (no functional changes)
+- [ ] Chore (build, CI, dependencies)
 
-- **What**: Brief summary of changes.
-- **Why**: Rationale or Issue reference (e.g., `Fixes #42`).
-- **How**: Key technical decisions.
+## Checklist
 
----
+- [ ] My code follows the project's coding standards
+- [ ] I have performed a self-review of my code
+- [ ] I have added/updated tests that prove my fix/feature works
+- [ ] New and existing tests pass locally (`pnpm nx affected -t test`)
+- [ ] I have updated relevant documentation
 
-_Developed under absolute zero-error threshold coding standards._
+## Screenshots (if applicable)
+
+<!-- Add screenshots for UI changes -->
