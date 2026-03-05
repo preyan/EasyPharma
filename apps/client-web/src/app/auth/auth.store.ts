@@ -8,9 +8,11 @@ import {
 } from '@ngrx/signals';
 import { computed } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { tapResponse } from '@ngrx/operators';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
-import { AuthService, User } from './auth.service';
+import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { AUTH_STORAGE_KEYS, ROLES, User, AuthResponse, LoginDto, RegisterDto } from '@easy-pharma/shared-core';
 
 export interface AuthState {
     user: User | null;
@@ -21,9 +23,9 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-    user: JSON.parse(localStorage.getItem('user') || 'null'),
-    accessToken: localStorage.getItem('accessToken'),
-    refreshToken: localStorage.getItem('refreshToken'),
+    user: JSON.parse(localStorage.getItem(AUTH_STORAGE_KEYS.USER) || 'null'),
+    accessToken: localStorage.getItem(AUTH_STORAGE_KEYS.ACCESS_TOKEN),
+    refreshToken: localStorage.getItem(AUTH_STORAGE_KEYS.REFRESH_TOKEN),
     isLoading: false,
     error: null,
 };
@@ -33,61 +35,63 @@ export const AuthStore = signalStore(
     withState(initialState),
     withComputed(({ user, accessToken }) => ({
         isAuthenticated: computed(() => !!accessToken() && !!user()),
-        isAdmin: computed(() => user()?.role === 'ADMIN'),
+        isAdmin: computed(() => user()?.role === ROLES.ADMIN),
         currentRole: computed(() => user()?.role || null),
     })),
     withMethods((store, authService = inject(AuthService), router = inject(Router)) => ({
-        login: rxMethod<any>(
+        login: rxMethod<LoginDto>(
             pipe(
                 tap(() => patchState(store, { isLoading: true, error: null })),
                 switchMap((credentials) =>
                     authService.login(credentials).pipe(
-                        tap((response) => {
-                            patchState(store, {
-                                user: response.user,
-                                accessToken: response.accessToken,
-                                refreshToken: response.refreshToken,
-                                isLoading: false,
-                            });
-                            localStorage.setItem('user', JSON.stringify(response.user));
-                            localStorage.setItem('accessToken', response.accessToken);
-                            localStorage.setItem('refreshToken', response.refreshToken);
-                            router.navigate(['/dashboard']);
-                        }),
-                        catchError((err) => {
-                            patchState(store, {
-                                isLoading: false,
-                                error: err.error?.message || 'Login failed',
-                            });
-                            return of(null);
+                        tapResponse({
+                            next: (response: AuthResponse) => {
+                                patchState(store, {
+                                    user: response.user,
+                                    accessToken: response.accessToken,
+                                    refreshToken: response.refreshToken,
+                                    isLoading: false,
+                                });
+                                localStorage.setItem(AUTH_STORAGE_KEYS.ACCESS_TOKEN, response.accessToken);
+                                localStorage.setItem(AUTH_STORAGE_KEYS.REFRESH_TOKEN, response.refreshToken);
+                                localStorage.setItem(AUTH_STORAGE_KEYS.USER, JSON.stringify(response.user));
+                                router.navigate(['/dashboard']);
+                            },
+                            error: (error: { error?: { message?: string } }) => {
+                                patchState(store, {
+                                    isLoading: false,
+                                    error: error.error?.message || 'Login failed',
+                                });
+                            },
                         })
                     )
                 )
             )
         ),
-        register: rxMethod<any>(
+        register: rxMethod<RegisterDto>(
             pipe(
                 tap(() => patchState(store, { isLoading: true, error: null })),
                 switchMap((data) =>
                     authService.register(data).pipe(
-                        tap((response) => {
-                            patchState(store, {
-                                user: response.user,
-                                accessToken: response.accessToken,
-                                refreshToken: response.refreshToken,
-                                isLoading: false,
-                            });
-                            localStorage.setItem('user', JSON.stringify(response.user));
-                            localStorage.setItem('accessToken', response.accessToken);
-                            localStorage.setItem('refreshToken', response.refreshToken);
-                            router.navigate(['/dashboard']);
-                        }),
-                        catchError((err) => {
-                            patchState(store, {
-                                isLoading: false,
-                                error: err.error?.message || 'Registration failed',
-                            });
-                            return of(null);
+                        tapResponse({
+                            next: (response: AuthResponse) => {
+                                patchState(store, {
+                                    user: response.user,
+                                    accessToken: response.accessToken,
+                                    refreshToken: response.refreshToken,
+                                    isLoading: false,
+                                });
+                                localStorage.setItem(AUTH_STORAGE_KEYS.ACCESS_TOKEN, response.accessToken);
+                                localStorage.setItem(AUTH_STORAGE_KEYS.REFRESH_TOKEN, response.refreshToken);
+                                localStorage.setItem(AUTH_STORAGE_KEYS.USER, JSON.stringify(response.user));
+                                router.navigate(['/dashboard']);
+                            },
+                            error: (error: { error?: { message?: string } }) => {
+                                patchState(store, {
+                                    isLoading: false,
+                                    error: error.error?.message || 'Registration failed',
+                                });
+                            },
                         })
                     )
                 )
@@ -110,15 +114,15 @@ export const AuthStore = signalStore(
                 refreshToken: null,
                 error: null,
             });
-            localStorage.removeItem('user');
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
+            localStorage.removeItem(AUTH_STORAGE_KEYS.USER);
+            localStorage.removeItem(AUTH_STORAGE_KEYS.ACCESS_TOKEN);
+            localStorage.removeItem(AUTH_STORAGE_KEYS.REFRESH_TOKEN);
             router.navigate(['/login']);
         },
         updateTokens(accessToken: string, refreshToken: string) {
             patchState(store, { accessToken, refreshToken });
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem(AUTH_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+            localStorage.setItem(AUTH_STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
         },
     }))
 );

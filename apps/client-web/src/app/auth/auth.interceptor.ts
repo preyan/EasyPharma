@@ -1,8 +1,9 @@
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthStore } from './auth.store';
 import { AuthService } from './auth.service';
+import { AuthStore } from './auth.store';
 import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
+import { ENDPOINTS, AuthResponse } from '@easy-pharma/shared-core';
 
 let isRefreshing = false;
 const refreshTokenSubject = new BehaviorSubject<string | null>(null);
@@ -13,7 +14,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
     const token = authStore.accessToken();
 
     let authReq = req;
-    if (token && !req.url.includes('/auth/refresh')) {
+    if (token && !req.url.includes(ENDPOINTS.AUTH.REFRESH)) {
         authReq = req.clone({
             setHeaders: { Authorization: `Bearer ${token}` }
         });
@@ -21,7 +22,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
 
     return next(authReq).pipe(
         catchError((error) => {
-            if (error instanceof HttpErrorResponse && error.status === 401 && !req.url.includes('/auth/login')) {
+            if (error instanceof HttpErrorResponse && error.status === 401 && !req.url.includes(ENDPOINTS.AUTH.LOGIN)) {
                 return handle401Error(authReq, next, authStore, authService);
             }
             return throwError(() => error);
@@ -42,7 +43,7 @@ function handle401Error(
         const refreshToken = authStore.refreshToken();
         if (refreshToken) {
             return authService.refresh(refreshToken).pipe(
-                switchMap((tokens) => {
+                switchMap((tokens: { accessToken: string; refreshToken: string }) => {
                     isRefreshing = false;
                     authStore.updateTokens(tokens.accessToken, tokens.refreshToken);
                     refreshTokenSubject.next(tokens.accessToken);
@@ -50,7 +51,7 @@ function handle401Error(
                         setHeaders: { Authorization: `Bearer ${tokens.accessToken}` }
                     }));
                 }),
-                catchError((err) => {
+                catchError((err: unknown) => {
                     isRefreshing = false;
                     authStore.clearState();
                     return throwError(() => err);
@@ -59,7 +60,7 @@ function handle401Error(
         } else {
             isRefreshing = false;
             authStore.clearState();
-            return throwError(() => new Error('No refresh token available'));
+            return throwError(() => new Error('No refresh token available')); // Explicitly creating an Error object
         }
     } else {
         return refreshTokenSubject.pipe(

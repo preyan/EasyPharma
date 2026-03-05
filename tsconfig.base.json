@@ -26,6 +26,9 @@
       ],
       "@easy-pharma/prisma-client": [
         "libs/shared/prisma/src/generated/prisma/index.ts"
+      ],
+      "@easy-pharma/shared-core": [
+        "libs/shared/core/src/index.ts"
       ]
     }
   },
