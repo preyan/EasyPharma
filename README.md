@@ -8,6 +8,7 @@
 ![Angular](https://img.shields.io/badge/Angular-21-dd0031)
 ![NestJS](https://img.shields.io/badge/NestJS-11-e0234e)
 ![Prisma](https://img.shields.io/badge/Prisma-7-2d3748)
+
 ![CI](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/ci.yml?branch=develop&label=CI)
 ![Security](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/security.yml?branch=develop&label=Security)
 ![Release](https://img.shields.io/github/actions/workflow/status/preyan/EasyPharma/release.yml?branch=develop&label=Release)
