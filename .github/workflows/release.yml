@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
@@ -158,12 +159,21 @@ permissions:
       - name: Commit, Tag & Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           export VERSION=$(node -p "require('./package.json').version")
           git add package.json CHANGELOG.md README.md
-          git diff --staged --quiet || git commit -m "chore(release): v$VERSION"
-          git tag "v$VERSION"
-          git push origin main --tags
-          gh release create "v$VERSION" --title "v$VERSION" --notes-file RELEASE_NOTES.md || echo "Release v$VERSION already exists."
+          
+          # Only commit/tag if there are changes
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(release): v$VERSION"
+            git tag "v$VERSION" || echo "Tag v$VERSION already exists"
+            git push origin "$BRANCH_NAME" --tags
+          fi
+
+          # Only create GitHub Release on main
+          if [ "$BRANCH_NAME" = "main" ]; then
+            gh release create "v$VERSION" --title "v$VERSION" --notes-file RELEASE_NOTES.md || echo "Release v$VERSION already exists."
+          fi

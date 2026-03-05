@@ -30,17 +30,12 @@ Goal: A zero-error, library-first Nx Monorepo.
 [PHASE 2] - Security, OIDC & RBAC (The Shield)
 Goal: Enterprise-grade Auth with Roles.
 
-[/] Task 2.1: Implement NestJS Auth Module with JWT Strategy → https://github.com/preyan/EasyPharma/issues/11.
-
-[ ] Task 2.2: Create @Roles() decorator and RolesGuard → https://github.com/preyan/EasyPharma/issues/12.
-
-[ ] Task 2.3: Implement NgRx Signal Store for Auth state in Angular → https://github.com/preyan/EasyPharma/issues/13.
-
-[ ] Task 2.4: Create Angular Functional Auth Guards for routing → https://github.com/preyan/EasyPharma/issues/14.
-
-[ ] Task 2.5: Configure Swagger Bearer Auth in main.ts → https://github.com/preyan/EasyPharma/issues/15.
-
-[ ] PHASE 2 AUDIT: Verify login flow and route protection. STOP HERE.
+[x] Task 2.1: Implement NestJS Auth Module with JWT Strategy → https://github.com/preyan/EasyPharma/issues/11.
+[x] Task 2.2: Create @Roles() decorator and RolesGuard → https://github.com/preyan/EasyPharma/issues/12.
+[x] Task 2.3: Implement NgRx Signal Store for Auth state in Angular → https://github.com/preyan/EasyPharma/issues/13.
+[x] Task 2.4: Create Angular Functional Auth Guards for routing → https://github.com/preyan/EasyPharma/issues/14.
+[x] Task 2.5: Configure Swagger Bearer Auth in main.ts → https://github.com/preyan/EasyPharma/issues/15.
+[/] PHASE 2 AUDIT: Verify login flow and route protection. STOP HERE.
 
 [PHASE 3] - Core Domain: Inventory Management
 Goal: Signal-driven CRUD with Zod validation.
