@@ -98,13 +98,13 @@ export class LoginComponent {
   public authStore = inject(AuthStore);
 
   loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]]
+    email: this.fb.control('', { validators: [Validators.required, Validators.email], nonNullable: true }),
+    password: this.fb.control('', { validators: [Validators.required, Validators.minLength(8)], nonNullable: true })
   });
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.authStore.login(this.loginForm.value);
+      this.authStore.login(this.loginForm.getRawValue());
     }
   }
 }

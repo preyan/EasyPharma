@@ -106,14 +106,14 @@ export class RegisterComponent {
   public authStore = inject(AuthStore);
 
   registerForm = this.fb.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]]
+    name: this.fb.control('', { validators: [Validators.required], nonNullable: true }),
+    email: this.fb.control('', { validators: [Validators.required, Validators.email], nonNullable: true }),
+    password: this.fb.control('', { validators: [Validators.required, Validators.minLength(8)], nonNullable: true })
   });
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.authStore.register(this.registerForm.value);
+      this.authStore.register(this.registerForm.getRawValue());
     }
   }
 }
