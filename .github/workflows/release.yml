@@ -13,23 +13,10 @@ permissions:
   issues: write
   pull-requests: write # For release-drafter
 
-jobs:
-  release-drafter:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: release-drafter/release-drafter@v6
-        with:
-          config-name: release-drafter.yml
-          disable-autolabeler: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   release-automation:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
-    needs: release-drafter
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -167,10 +154,15 @@ jobs:
 
             fs.writeFileSync('README.md', readme);
 
-      - name: Commit & Push
+      - name: Commit, Tag & Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          export VERSION=$(node -p "require('./package.json').version")
           git add package.json CHANGELOG.md README.md
-          git diff --staged --quiet || git commit -m "chore(release): v$(node -p "require('./package.json').version")"
-          git push
+          git diff --staged --quiet || git commit -m "chore(release): v$VERSION"
+          git tag "v$VERSION"
+          git push origin main --tags
+          gh release create "v$VERSION" --title "v$VERSION" --notes "Automatic release for v$VERSION. See CHANGELOG.md for full details." || echo "Release v$VERSION already exists."
